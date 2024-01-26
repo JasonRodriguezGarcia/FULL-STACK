@@ -1,0 +1,87 @@
+/*helper, esto crea un espacio en blanco a ser llamado cuando queramos*/
+.spacer50 {
+    height: 60px;
+    width: 100%;
+}
+
+/* styles */
+.gridOne {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+}
+.gridOne p:nth-child(2) {
+    color: blue
+}
+
+.gridTwo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+}
+.gridTwo > .gridTwo1 p{
+    background-color: red;
+}
+.gridTwo > .gridTwo2 p{
+    background-color: blue;
+}
+.gridTwo > .gridTwo3 p{
+    background-color: yellow;
+}
+
+.gridThree {
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    width: 500px;
+    height: 300px;
+    background-color: grey;
+
+}
+.gridThree > .gridThree2 img {
+/*    width: 100%;
+    height: 100%;*/
+    width: 500px;
+    height: 225px;
+    object-fit: cover;
+}
+
+.gridFour {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    width: 500px;
+    background-color: green;
+}
+.gridFour > #gridFour2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.gridFive {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    width: 500px;
+    background-color: green;
+}
+.gridFive > .gridFive2 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 70px;
+}
+.gridFive > .gridFive2 img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+
+}
+
+.gridSix {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 500px;
+    background-color: gray;
+}
+.gridSix p{
+    font-size: 1.5em;
+    font-family: "Font Awesome\ 5 Free", Arial, Helvetica, sans-serif; 
+    font-weight: 600;
+    color: #585858;
+ 
+}
