@@ -1,0 +1,55 @@
+
+SCSS es muy parecido a CSS,nos permite poder agilizar todo nuestro trabajo con CSS.
+Es parecido a un lenguaje de programación, hace una precompilación que al final es convertida a CSS que es interpretado por el navegador. Como cualquier lenguaje de programación tiene algunas reglas a seguir
+Permite compartir y evitar duplicación de código así como 
+
+-Mediante una variable podemos cambiar por ejemplo el color en un solo sitio para toda la aplicación web en lugar de hacer el cambia en toda la web.
+Se pueden declar al principio de el fichero SCSS
+$color: red; /*solo hay que cambiar el color aquí */
+
+.....
+
+.error-message {
+color: $color;
+...
+.wrong-password {
+color: $color;
+}
+
+-Permite compartir código:
+Ejemplo @mixin en SCSS
+@mixin formato-texto {
+text-align: center;
+font-size: 1.2em;
+...
+}
+
+.error-message {
+@include formato-texto;
+color: red;
+border: white;
+}
+
+.success-message {
+@include formato-texto;
+color: blue;
+border: green;
+}
+
+también se podrían pasar parámetros al @mixin (bloque de código que puede ser reutilizado) haciéndolo más versátil:
+@mixin formato-texto ($color, $borde) {
+text-align: center;
+font-size: 1.2em;
+color: $color;
+border: $borde;
+}
+
+...codigo...
+....
+@include formato-texto ($color: red, $borde: white);
+....
+
+La medida fraccionaria en CSS Grid es una unidad de medida que permite fraccionar en partes iguales o no. El ordenador las recalcula.
+1fr 1fr 1fr - 3 columnas fraccionadas en partes iguales.
+2fr 1fr 1fr - 1 columna 2 fracciones más grandes que las otras 2, que serán de 1 fracción.
+
