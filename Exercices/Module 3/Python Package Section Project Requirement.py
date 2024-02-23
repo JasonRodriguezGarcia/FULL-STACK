@@ -1,6 +1,5 @@
 import requests
 import inflection
-#import bs4
 from bs4 import BeautifulSoup
 
 def pulir_cadena(cadena_a_pulir):
@@ -14,16 +13,36 @@ for indice in sopita.find_all('a'):
         cadena = cadena[str(cadena).index('/posts/')+7:]
         print(pulir_cadena(cadena))       
 
-#        print (cadena)
-# urls = sopita.find_all ("a")
-#for num in range(0, len(urls)):
-#    print (urls[num])
-#    cadena=urls[num]
-#    query=str(cadena).index('">')+2
-#    query2=str(cadena).index("</")
-#    cadena2=str(cadena)[query:query2]
-#    cadena=urls[num]
-#    cadena2=str(cadena)[str(cadena).index('">')+2:str(cadena).index("</")]
-#    cadena2=str(cadena)[str(cadena).index('/posts/')+7:str(cadena).index(">")]
-#    print (cadena2)
-#    print ("************************")
+#### final solution
+import requests
+from bs4 import BeautifulSoup
+from inflection import titleize
+
+def title_generator(links):
+    titles = []
+
+    def post_formatter(url):
+        if 'posts' in url:
+            url = url.split('/')[-1]
+            url = url.replace('-', ' ')
+            url = titleize(url)
+            titles.append(url)
+
+# UPDATED CODE
+    for link in links:
+        if link.get('href') == None:
+            continue
+        else:
+            post_formatter(link.get("href"))
+# UPDATED CODE
+
+    return titles
+
+
+r = requests.get('http://www.dailysmarty.com/topics/python')
+soup = BeautifulSoup(r.text, 'html.parser')
+links = soup.find_all('a')
+titles = title_generator(links)
+
+for title in titles:
+    print(title)
