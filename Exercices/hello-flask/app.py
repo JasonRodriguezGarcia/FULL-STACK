@@ -5,16 +5,15 @@ import os
 
 app = Flask(__name__)
 
-basedir = os.path.abspath(os.path.dirname(__file__)) # saca el directorio de trabajo
-#tipo de base de datos                               # del fichero actual
+basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-class Guide(db.Model):                           #Estructura base datos
-    id = db.Column(db.Integer, primary_key=True) # campo id primary key autonumerico
-    title = db.Column(db.String(100), unique=False) #campo title string(100)
-    content = db.Column(db.String(144), unique=False) #campo content string(144)
+class Guide(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), unique=False)
+    content = db.Column(db.String(144), unique=False)
 
     def __init__(self, title, content):
         self.title = title
@@ -43,6 +42,45 @@ def add_guide():
     guide = Guide.query.get(new_guide.id)
 
     return guide_schema.jsonify(guide)
+
+
+# Endpoint to query all guides
+@app.route("/guides", methods=["GET"])
+def get_guides():
+    all_guides = Guide.query.all()
+    result = guides_schema.dump(all_guides)
+    return jsonify(result)
+
+
+# Endpoint for querying a single guide, <id> is the id we add in order for the one to be queried
+@app.route("/guide/<id>", methods=["GET"])
+def get_guide(id):
+    guide = Guide.query.get(id)
+    return guide_schema.jsonify(guide)
+
+
+# Endpoint for updating a guide, <id> is the id for the one to update
+@app.route("/guide/<id>", methods=["PUT"])
+def guide_update(id):
+    guide = Guide.query.get(id) #still pending if the one to update exists then update
+    title = request.json['title']
+    content = request.json['content']
+
+    guide.title = title
+    guide.content = content
+
+    db.session.commit()
+    return guide_schema.jsonify(guide)
+
+
+# Endpoint for deleting a record
+@app.route("/guide/<id>", methods=["DELETE"])
+def guide_delete(id):
+    guide = Guide.query.get(id) #still pending if the one to update exists then delete
+    db.session.delete(guide)
+    db.session.commit()
+
+    return "Guide was successfully deleted"
 
 
 if __name__ == '__main__':
