@@ -80,7 +80,7 @@ def guide_delete(id):
     db.session.delete(guide)
     db.session.commit()
 
-    return "Guide was successfully deleted"
+    return "Guide was successfully deleted!!"
 
 
 if __name__ == '__main__':
