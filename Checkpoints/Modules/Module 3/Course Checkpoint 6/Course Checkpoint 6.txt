@@ -1,0 +1,336 @@
+¿Para qué usamos Classes en Python?
+-----------------------------------
+Una clase en Python es una estructura de programación que permite definir un conjunto de métodos y atributos que describen un objeto o entidad. Las clases son un concepto fundamental en la programación orientada a objetos, que se utilizan para modelar entidades del mundo real o abstracto en un programa de computadora.
+Una clase se usa para definir una plantilla o molde y poder crear objetos, los cuales son instancias (copias) de esa clase. Los objetos creados a partir de una clase tienen las mismas propiedades y comportamientos definidos por la clase (herencia), pero pueden tener valores diferentes para los atributos que se definen en la clase.
+En Python, una clase se define mediante la palabra clave «class», seguida del nombre de la clase y dos puntos (:) y luego el cuerpo de la clase. Las siguientes líneas tienen que seguir con identation (sangría)
+La nomemclatura en los nombres de class es Camel Case.
+Ejemplo código clase My_Class
+
+class My_Class:
+    print ("Hi there!!)
+
+El cuerpo de la clase puede contener definiciones de métodos (funciones internas) y atributos (variables), que pueden ser públicos o privados según su acceso.
+Ejemplo clase Droid
+class Droid:
+    def switch_on(self):	<<--método
+        self.power_on = True	<<--atributo
+        print("Hi! I'm a droid. Can I help you?")
+
+    def switch_off(self):	<<-método
+        self.power_on = False	<<-atributo
+        print("Bye! I'm going to sleep")
+
+>>>k2so = Droid() <<--crea el objeto k2so como una copia de la clase Droid, a esto se le llama instanciar una clase.
+
+>>>k2so.switch_on() <<--llamada al método switch_on
+Hi! I'm a droid. Can I help you?
+
+>>>k2so.power_on <<--llamada al atributo power_on
+True
+
+>>>k2so.switch_off() <<--llamada al método switch_off
+Bye! I'm going to sleep
+
+>>>k2so.power_on <<--llamada al atributo power_on
+False
+
+¿Qué método se ejecuta automáticamente cuando se crea una instancia de una clase?
+---------------------------------------------------------------------------------
+Existe un método especial que se ejecuta cuando creamos una instancia de un objeto. Este método es __init__ y nos permite asignar atributos y realizar operaciones con el objeto en el momento de su creación. También es ampliamente conocido como el constructor.
+Ejemplo
+class Droid:
+    def __init__(self, name: str): <<--definicion del constructor
+        self.name = name
+
+
+>>>droid = Droid('BB-8') <<--creación del objeto
+
+>>>droid.name <<--acceso al atributo name
+'BB-8'
+
+¿Cuáles son los tres verbos de API?
+-----------------------------------
+Entiendo que os referís a los verbos en HTTP. En realidad hay más de tres.
+
+Un protocolo es aquel que especifica las reglas de la comunicación, en este caso, entre dos computadoras. El protocolo HTTP (Hyper Text Transfer Protocol) fue creado específicamente para la web.
+Cuáles son los verbos HTTP?
+
+Una de las especificaciones de este protocolo son sus verbos, estos nos ayudan a indicar acciones.
+GET. Lo utilizamos para solicitar datos o recursos específicos.
+POST. Envía datos a un recurso para su creación.
+PUT. Es utilizado para actualizar un recurso.
+DELETE. Elimina por completo un recurso.
+PATCH. Actualiza un sección especifica de un recurso.
+HEAD. Es similar a una petición GET pero sin contenido, sólo traer los encabezados.
+
+En ejemplo de su uso sería cuando vamos a utilizar APIs, para comprobar si lo que vamos a enviar es correcto y puede ser procesado.
+
+¿Es MongoDB una base de datos SQL o NoSQL?
+------------------------------------------
+MongoDB es una base de datos NoSQL orientada a documentos que apareció a mediados de la década de 2000. Se utiliza para almacenar volúmenes masivos de datos.
+
+A diferencia de una base de datos relacional SQL tradicional, MongoDB no se basa en tablas y columnas. Los datos se almacenan como colecciones y documentos.
+
+Los documentos son pares value/key que sirven como unidad básica de datos. Las colecciones contienen conjuntos de documentos y funciones. Son el equivalente a las tablas en las bases de datos relacionales clásicas.
+
+Los documentos no tienen un esquema predefinido y los campos pueden añadirse a voluntad. El modelo de datos disponible en MongoDB facilita la representación de relaciones jerárquicas u otras estructuras complejas.
+
+Otra característica importante de MongoDB es la elasticidad de sus entornos. Muchas empresas tienen clusters de más de 100 nodos para bases de datos que contienen millones de documentos. 
+
+¿Qué es una API?
+----------------
+API es el acrónimo en inglés de "interfaz de programación de aplicaciones", un software intermediario que permite que las aplicaciones se comuniquen entre sí. Cada vez que se usa una aplicación como Facebook, se envía un mensaje instantáneo o se mira el pronóstico del tiempo en el teléfono, se utiliza una API.
+Cuando se utiliza una aplicación en un teléfono móvil, la aplicación se conecta a Internet y envía datos a un servidor. El servidor, a continuación, recupera los datos, los interpreta, realiza las acciones necesarias y los envía de vuelta al teléfono móvil. La aplicación interpreta entonces los datos y presenta la información deseada de manera legible. Todo ello sucede a través de una API.
+
+Para explicar mejor este proceso, veamos un ejemplo de la vida cotidiana.
+Imagina que estás en un restaurante y tienes todo un menú para elegir. La cocina es la parte del "sistema" que prepara tu pedido. El elemento que falta es el enlace esencial que comunica tu pedido a la cocina y te lo sirve luego en la mesa. Es aquí donde entra en juego el camarero, que vendría a ser la API. El camarero es el mensajero (la API) que comunica a la cocina (el sistema) lo que debe hacer. Después, el camarero te entrega la respuesta; en este caso, la comida.
+
+Veamos ahora un ejemplo de API en la vida real. Es posible que conozcas el proceso de búsqueda de vuelos online. Como sucede en el restaurante, dispones de una amplia variedad de opciones entre las que elegir, como diferentes ciudades, fechas, etc. Imaginemos que estás reservando un vuelo en el sitio web de una aerolínea. Eliges la ciudad de salida y la fecha, la ciudad de vuelta y la fecha, la clase y otras variables. Para reservar el vuelo, interactúas con el sitio web de la aerolínea para acceder a su base de datos y consultar si hay asientos disponibles en esas fechas y cuál sería el precio.
+
+Sin embargo, ¿qué pasa si no vamos al sitio web de la aerolínea, que es un canal que tiene acceso directo a la información? ¿O qué sucede cuando recurrimos a una agencia de viajes digital, como Kayak o Expedia, que agrega información procedente de diversas bases de datos de aerolíneas?
+
+La agencia de viajes, en este caso, es quien interactúa con la API de la aerolínea. La API es la interfaz a la que, como a un servicial camarero, la agencia de viajes puede recurrir para obtener la información de asientos, opciones de equipaje, etc. almacenada en la base de datos de la aerolínea. A continuación, la API transmite la respuesta de la aerolínea a la solicitud y entrega la información a la agencia de viajes digital, que ahora puede facilitar la información más actualizada y relevante.
+
+La API proporciona una capa de seguridad, de esta manera, los datos del usuario nunca se exponen íntegramente al servidor, de la misma manera que el servidor nunca se expone íntegramente al punto de acceso. Lo que ocurre es que cada parte implicada se comunica mediante pequeños paquetes de datos, compartiendo solo lo estrictamente necesario, como sucede al pedir comida. El usuario comunica al restaurante lo que le gustaría comer, el restaurante indica lo que necesita a cambio y, al final, se entrega la comida.
+
+Las API son ahora tan valiosas que constituyen una gran parte de los ingresos de las empresas. Grandes empresas como Google, eBay, Salesforce.com, Amazon y Expedia son tan solo algunas de las organizaciones que obtienen beneficios de las API. Este mercado se conoce como la "economía de las API".
+
+¿Qué es Postman?
+----------------
+servicios web a través de APIs. Es una herramienta de colaboración y desarrollo que permite a los desarrolladores interactuar y probar el funcionamiento de servicios web y aplicaciones. proporcionando una interfaz gráfica intuitiva y fácil de usar para enviar solicitudes a servidores web y recibir las respuestas correspondientes. Ofrece una GUI que facilita a los desarrolladores el envío de solicitudes HTTP y HTTPS a una API y a gestionar las respuestas recibidas.
+
+Postman en sus inicios nace como una extensión que podía ser utilizada en el navegador Chrome de Google y básicamente nos permite realizar peticiones de una manera simple para testear APIs de tipo REST propias o de terceros.
+
+Gracias a los avances tecnológicos, Postman ha evolucionado y ha pasado de ser de una extensión a una aplicación que dispone de herramientas nativas para diversos sistemas operativos como lo son Windows, Mac y Linux.
+
+Postman es una aplicación especialmente útil en el desarrollo web y de apps móviles que se comunican con 
+Con esta plataforma se puede gestionar diferentes entornos de desarrollo, organizar las solicitudes en colecciones y realizar pruebas automatizadas para verificar el comportamiento de los sistemas. 
+Postman es utilizado por los desarrolladores para testear colecciones y catálogos APIs (tanto a nivel front-end como back-end), para gestionar el ciclo de vida de las APIs, mejorar el trabajo colaborativo y mejorar la organización del proceso de diseño y desarrollo.
+
+Las principales características y funcionalidades de Postman son:
+
+Envío de solicitudes. Permite enviar solicitudes GET, POST, PUT, DELETE y otros métodos HTTP a una API especificando los parámetros, encabezados y cuerpo de la solicitud.
+Gestión de entornos. Facilita la configuración para diferentes entornos (por ejemplo, desarrollo, prueba, producción) y el cambio sencillo entre ellos (para realizar pruebas y desarrollo en diferentes contextos).
+Colecciones de solicitudes. Agrupa las solicitudes relacionadas en colecciones, lo que facilita la organización y ejecución de pruebas automatizadas.
+Pruebas automatizadas. Es ideal para crear y ejecutar pruebas automatizadas para verificar el comportamiento de una API (detectar errores e incrementar la calidad del software).
+Documentación de API. Genera de forma automatizada, documentación detallada de la API a partir de las solicitudes y respuestas realizadas, lo que facilita su comprensión y uso por parte de otros desarrolladores.
+
+Cada vez son más los desarrolladores y programadores que apuestan por un entorno como Postman para automatizar pruebas y mejorar sus procesos de trabajo. Los principales beneficios que se obtienen con esta herramienta son:
+
+Facilidad a la hora de trabajar al disponer de una interfaz gráfica de usuario intuitiva, sencilla y personalizable.
+
+Amplia compatibilidad con numerosas tecnologías y protocolos web, como por ejemplo; HTTP, HTTPS, REST, SOAP, GraphQL… (lo que permite interaccionar con diversos tipos de API sin complicaciones o problemas).
+Ofrece una amplia gama de funcionalidades para diseñar, probar y documentar APIs, siendo probablemente la solución más completa del mercado para gestionar el ciclo de vida completo de desarrollo de APIs.
+Fomenta y facilita la colaboración entre los miembros del equipo de desarrollo (con opciones interesantes como compartir colecciones de solicitudes con otros desarrolladores).
+Cuenta con una comunidad amplia de usuarios que está en constante crecimiento y que aporta una gran cantidad de recursos, como tutoriales, documentación, foros y grupos de discusión…
+Se integra perfectamente con varias herramientas populares utilizadas en el desarrollo de software. Por ejemplo, se puede conectar con sistemas de control de versiones como GitHub, servicios de generación de documentación como Swagger o herramientas de automatización de pruebas como Jenkins, entre muchas otras.
+Permite a los usuarios agregar scripts personalizados utilizando JavaScript (para automatizar tareas repetitivas, configurar pruebas avanzadas o agregar validaciones personalizadas a las respuestas de la API).
+
+Las colecciones son una característica central de Postman que permite organizar y agrupar solicitudes relacionadas. Esto simplifica la administración de API complejas y facilita la reutilización de solicitudes y flujos de trabajo en diferentes proyectos.
+
+¿Qué es el polimorfismo?
+------------------------
+El polimorfismo es uno de los pilares básicos en la programación orientada a objetos, por lo que para entenderlo es importante tener las bases de la POO y la herencia bien asentadas.
+
+El término polimorfismo tiene origen en las palabras poly (muchos) y morfo (formas), y aplicado a la programación hace referencia a que los objetos pueden tomar diferentes formas. ¿Pero qué significa esto?
+
+Pues bien, significa que objetos de diferentes clases pueden ser accedidos utilizando el mismo interfaz, mostrando un comportamiento distinto (tomando diferentes formas) según cómo sean accedidos.
+
+La programación orientada a objetos nos permite crear clases que pueden heredar propiedades, métodos y comportamientos de otras clases ya existentes. En Python, la herencia es una característica clave que nos permite crear clases hijas a partir de una clase padre.
+
+La herencia en Python se logra por medio de una sintaxis sencilla que involucra la creación de una nueva clase que hereda atributos y métodos de la clase padre. Para crear una clase hija en Python, simplemente agregamos el nombre de la clase padre en paréntesis después del nombre de la clase hija.
+
+El polimorfismo, por otro lado, es una característica que nos permite utilizar objetos de diferentes clases de manera intercambiable. Esto significa que el mismo método o función puede ser utilizado en diferentes tipos de objetos, sin preocuparnos por conocer los detalles exactos de cada uno de ellos. En Python, el polimorfismo está estrechamente relacionado con la herencia y la superposición de métodos.
+
+La superposición de métodos es una técnica que nos permite modificar el comportamiento de los métodos heredados de la clase padre en la clase hija. Esto se logra al definir un método con el mismo nombre en la clase hija como en la clase padre. Cuando se llama al método en la clase hija, el intérprete de Python buscará la definición del método en la clase hija primero y, si no la encuentra, lo buscará en la clase padre.
+
+En Python, también podemos acceder a los métodos heredados de la clase padre utilizando la función super(). Esto nos permite llamar al método de la clase padre directamente desde la clase hija, ahorrándonos tiempo y esfuerzo en la reescritura de código.
+
+ La herencia y el polimorfismo en Python nos permiten crear clases con una mayor flexibilidad y versatilidad. Esto nos permite reutilizar código y diseñar sistemas más eficientes y escalables. Si buscas mejorar tus habilidades de programación en Python, no puedes dejar de aprender sobre la herencia y el polimorfismo.
+
+Cómo utilizar la herencia para crear clases hijas con componentes similares pero diferentes funcionalidades
+La herencia es una de las características más útiles de la programación orientada a objetos (POO) que nos permite crear clases hijas con componentes similares pero diferentes funcionalidades. En Python, esto se logra mediante la creación de una clase que hereda todas las propiedades y métodos de otra clase. Para hacer uso de esta, utilizamos la palabra clave ‘super’ para referirnos a la clase padre.
+
+Por ejemplo, si tenemos una clase ‘Animal’ con algunas propiedades y métodos, podemos crear una clase ‘Perro’ que hereda estas propiedades y métodos. Además, podemos agregar propiedades y métodos adicionales específicos de la clase de ‘Perro’.
+
+class Animal:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def hacer_sonido(self):
+        print("Este animal hace algún sonido")
+
+class Perro(Animal):
+    def __init__(self, nombre, edad, raza):
+        super().__init__(nombre, edad)
+        self.raza = raza
+
+    def hacer_sonido(self):
+        print("El perro hace guau guau")
+
+En este ejemplo, la clase ‘Perro’ hereda las propiedades de la clase ‘Animal’ mediante la declaración de ‘(Animal)’ en su definición. Además, sobre escribe el método ‘hacer_sonido’, para que este método ahora muestre “El perro hace guau guau” en lugar de “Este animal hace algún sonido”.
+
+Esto significa que, al crear una instancia de la clase ‘Perro’, podemos acceder a las propiedades y métodos de la clase ‘Animal’ y también a las nuevas propiedades y métodos de la clase ‘Perro’.
+
+mi_perro = Perro("Scottie", 3, "Terrier")
+print(mi_perro.nombre) # Scottie
+print(mi_perro.edad) # 3
+print(mi_perro.raza) # Terrier
+mi_perro.hacer_sonido() # El perro hace guau guau
+
+La herencia también nos permitirá modificar o añadir nuevos métodos o atributos a la clase hija sin afectar la clase padre. En el ejemplo anterior, la clase ‘Perro’ sobrescribió el método ‘hacer_sonido’, pero también incluimos una propiedad de perro ‘raza’ que no está presente en la clase ‘Animal’.
+
+ La herencia es una poderosa herramienta de programación orientada a objetos que permite a los desarrolladores crear clases hijas con componentes similares pero diferentes funcionalidades. Con Python, podemos heredar propiedades y métodos de una clase padre y anexar nuevas propiedades y métodos únicos a una clase hija.
+
+El polimorfismo permite a distintos objetos responder de manera diferente a una misma llamada de método. Es una técnica de la programación orientada a objetos que permite a distintos objetos responder de manera diferente a un mismo llamado de método. En Python, esto se logra gracias al uso de clases y funciones, lo que aumenta significativamente la flexibilidad de nuestras implementaciones.
+
+Una de las ventajas del polimorfismo es que nos permite escribir código más genérico, lo que a su vez nos permite reutilizar nuestro código en una variedad de situaciones. Imagina que tienes una clase Mascota con un método saludar(). Si tienes varias clases que heredan de Mascota, como Perro y Gato, cada una puede definir su propia implementación del método saludar(). Entonces, cuando llames a saludar() en un objeto de tipo Perro, la implementación de Perro se ejecutará, mientras que en un objeto de tipo Gato, la implementación de Gato se ejecutará. Esto significa que puedes escribir un método que trabaje con cualquier objeto de la clase Mascota, independientemente de si es un Perro o un Gato.
+
+Veamos un ejemplo para entenderlo mejor. Supongamos que tenemos una clase Figura, que tiene un método abstracto area(). La idea detrás de esta clase es que cualquier figura que queramos modelar, sea un cuadrado, un círculo, un triángulo, etc., siempre tendrá una propiedad de área. Entonces, podemos crear una clase Cuadrado que herede de Figura y defina su propia implementación de area(), que calcularía el área del cuadrado. Lo mismo podemos hacer para otras figuras, como un Círculo o un Triángulo.
+
+class Figura:
+    def area(self):
+        pass
+
+class Cuadrado(Figura):
+    def __init__(self, lado):
+        self.lado = lado
+
+    def area(self):
+        return self.lado * self.lado
+Una vez que hemos definido nuestras clases, podemos crear un método que acepte cualquier objeto de tipo Figura, y usar el método area() para calcular el área de esa figura particular:
+
+def calcular_area(figura):
+    return figura.area()
+Ahora, podemos crear cualquier objeto de tipo Figura y pasarlo a nuestro método calcular_area().
+
+cuadrado = Cuadrado(5)
+circulo = Circulo(3)
+triangulo = Triangulo(4, 5)
+
+print(calcular_area(cuadrado))
+print(calcular_area(circulo))
+print(calcular_area(triangulo))
+Esto nos dará los resultados correspondientes, calculando el área de cada una de nuestras figuras.
+
+ El polimorfismo es una herramienta poderosa que nos permite reutilizar código y hacerlo más genérico. En Python, podemos implementar el polimorfismo a través del uso de clases, herencia y funciones, lo que nos da una gran flexibilidad en nuestro código. Si aún no has experimentado con el polimorfismo en Python, te animo a que lo pruebes y veas cómo puede hacer que tu código sea más flexible y fácil de leer.
+
+
+¿Qué es un método dunder?
+------------------------
+método dunder= "método mágico"
+Una de las características menos conocidas pero valiosas de Python es la capacidad de implementar "métodos mágicos" en los objetos. Usando métodos mágicos, podemos escribir un código más limpio que sea intuitivo y fácil de entender.
+
+Con métodos mágicos, podemos creara Interfaces para interactuar con objetos de una manera que se siente más pitónica. Estos párrafos presentarán que son los métodos mágicos, analizará las mejores prácticas para crearlos y explorará los métodos mágicos comunes que encontrará.
+
+¿Qué son los métodos mágicos?
+Los métodos mágicos son métodos de Python que definen cómo se comportan los objetos de Python cuando se realizan operaciones comunes sobre ellos. Estos métodos se definen claramente con guiones bajos dobles antes y después del nombre del método.
+
+Como resultado, comúnmente se les llama métodos dunder, como en double bajopuntaje. Un método común de dunder que ya nos hemos encontrado es el __init__() método que se utiliza para definir constructores de clases.
+
+Normalmente los métodos dunder no deben llamarse directamente en su código; más bien, el intérprete los llamará mientras el programa se está ejecutando.
+
+¿Por qué son útiles los métodos mágicos?
+Los métodos mágicos son un concepto útil en la Programación Orientada a Objetos en Python. Usándolos, usted especifica el comportamiento de sus tipos de datos personalizados cuando se usan con operaciones integradas comunes. Estas operaciones incluyen: Operaciones aritméticas, Operaciones de comparación, Operaciones de ciclo de vida, Operaciones de representación
+
+Cómo definir métodos mágicos
+Los métodos mágicos especifican el comportamiento de los objetos. Como tales, se definen como parte de la clase del objeto. Como son parte de la clase de objeto, toman como primer argumento self que es una referencia al objeto en sí.
+
+Pueden tomar argumentos adicionales dependiendo de cómo los llamará el intérprete. También se definen claramente con dos guiones bajos antes y después de sus nombres.
+
+A continuación, un ejemplo de una clase Rectángulo simple.
+
+Esta clase tendrá propiedades de largo y ancho. Usando el método __init__, puede especificar estas propiedades al crear instancias. Además, podrás comparar diferentes rectángulos para ver si son iguales, menores o mayores que otro usando el ==, < y > operadores. Por último, el rectángulo debe ser capaz de proporcionar una representación de cadena significativa.
+
+Crear la clase Rectángulo
+Primero, comencemos definiendo la clase Rectangle.
+
+class Rectangle:
+    pass
+Creando el Método Constructor
+A continuación, creemosate nuestro primer método mágico, el método constructor de clases. Este método tomará el alto y el ancho y los almacenará como atributos en la instancia de clase.
+
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+Creación de un método mágico para la representación de cadenas
+A continuación, queremos crearate un método que permite a nuestra clase generarate una cadena legible por humanos para representar el objeto. Este método será llamado siempre que llamemos al str() función que pasa en una instancia de la Rectangle clase como argumento. Este método también se llamará cuando llame a funciones que esperan un argumento de cadena, como el print función.
+
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+
+    def __str__(self):
+        return f'Rectangle({self.height}, {self.width})'
+
+rectangle = Rectangle (4, 5)
+print(str(rectangle))
+
+El __str__() El método debe devolver una cadena que le gustaría representar el objeto. En este caso, estamos devolviendo una cadena del formato Rectangle(<height>, <width>) donde alto y ancho son las dimensiones almacenadas del rectángulo.
+
+Estos son varios métodos dunder, hay más pero llevaría mucho explicarlos con detalle.
+
+¿Qué es un decorador de python?
+-------------------------------
+ Los atributos definidos en un objeto clase son accesibles públicamente. Esto puede parecer extraño a personas que vengan de otros lenguajes de programación (véase Java). En Python existe un cierto «sentido de la responsabilidad» a la hora de programar y manejar este tipo de situaciones: Casi todo es posible a priori pero se debe controlar explícitamente.
+
+Una primera solución «pitónica» para la privacidad de los atributos es el uso de propiedades. La forma más común de aplicar propiedades es mediante el uso de decoradores:
+
+@property para leer el valor de un atributo («getter»).
+
+@name.setter para escribir el valor de un atributo.
+
+Veamos un ejemplo en el que estamos ofuscando el nombre del droide a través de propiedades:
+
+>>>
+class Droid:
+    def __init__(self, name: str):
+        self.hidden_name = name
+
+    @property
+    def name(self) -> str:
+        print('inside the getter')
+        return self.hidden_name
+
+    @name.setter
+    def name(self, name: str) -> None:
+        print('inside the setter')
+        self.hidden_name = name
+
+
+>>>droid = Droid('N1-G3L')
+
+>>>droid.name
+inside the getter
+'N1-G3L'
+
+>>>droid.name = 'Nigel'
+inside the setter
+
+>>>droid.name
+inside the getter
+'Nigel'
+En cualquier caso, seguimos pudiendo acceder directamente a .hidden_name:
+
+>>>droid.hidden_name
+'Nigel'
+Incluso podemos cambiar su valor:
+
+>>>droid.hidden_name = 'waka-waka'
+
+>>>droid.name
+inside the getter
+'waka-waka'
+
+
+y después tienes que realizar este ejercicio y mandarmelo
+---------------------------------------------------------
+
+Create a Python class called User that uses the init method and creates a username and a password. Create an object using the class.
+
+Ejercicio en https://github.com/JasonRodriguezGarcia/FULL-STACK/tree/main/Checkpoints/Modules/Module%203/Course%20Checkpoint%206
+
+
