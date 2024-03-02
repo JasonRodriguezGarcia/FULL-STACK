@@ -1,0 +1,232 @@
+¿Qué hace que Javascript sea diferente de cualquier otro lenguaje de programación?
+----------------------------------------------------------------------------------
+JavaScript es un lenguaje de programación de alto nivel, interpretado, es de tipado débil y dinámico, y basado en prototipos. A diferencia de HTML y CSS, que se utilizan para la estructura y el diseño de un sitio web, JavaScript se enfoca en la interacción y la manipulación de elementos en tiempo real. Con JavaScript, es posible agregar funcionalidades dinámicas a las páginas web, como formularios interactivos, efectos visuales y actualizaciones, sin necesidad de refrescar la página.
+
+-Un lenguaje de programación de alto nivel o de segunda generación es aquel que utiliza un lenguaje más cercano al humano y que necesita de un intérprete o compilador para traducir el código y que pueda ser comprendido por la máquina.
+
+Con un lenguaje de alto nivel un programador puede escribir código utilizando expresiones muy similares al lenguaje natural. Por ejemplo, para añadir una condición al programa puede utilizar la instrucción “if” que significa “si”, haciendo el código más sencillo de comprender para las personas, o para la declaración de una variable de tipo entero se utiliza «int» o «integer» que significa entero.
+
+-JavaScript es un lenguaje interpretado, lo que significa que no necesita ser compilado (traducido al completo en lenguaje máquina que entiende el ordenador) antes de ser ejecutado. En otras palabras, no necesita traducir el código fuente (el escrito por la persona) en lenguaje de máquina para poder ejecutarse.
+
+Los navegadores web modernos tienen un motor JavaScript incorporado que interpreta y ejecuta el código directamente. Al ejecutarse línea por línea o en pequeñas secciones, permite que los errores se detecten y se notifiquen de inmediato.
+
+Al ser un lenguaje script (es decir, ejecuta secuencias de comandos) JavaScript debe seguir el estándar ECMA para garantizar su operatividad en diferentes versiones de navegadores y plataformas.
+¿Qué es el estándar ECMAScript?
+ECMAScript se creó para estandarizar JavaScript y garantizar su compatibilidad y portabilidad. Es mantenido por la organización Ecma International, un organismo sin ánimo de lucro de estándares técnicos. La versión más reciente es ECMA-262, publicada en junio de 2022 en su decimotercera edición.
+
+El estándar ECMAScript define la sintaxis del lenguaje, los tipos de datos, los operadores, las estructuras de control y muchos otros elementos que componen el lenguaje de programación. Además, también especifica las API (Interfaces de Programación de Aplicaciones) que están disponibles para interactuar con el entorno en el que se ejecuta JavaScript, como el acceso al DOM en el caso de JavaScript, en un navegador web.
+
+-JavaScript es de tipado débil y dinámico ya las variables no están fuertemente tipadas, lo que significa que no es necesario declarar explícitamente el tipo a una variable cuando se le asigna un valor. Esto permite que el tipo de la variable pueda cambiar durante la ejecución del programa. ¡Pero hay que tener cuidado!, el valor asignado a la variable se sobrescribirá y si no tienes un buen seguimiento del código, puede causar errores.
+Ejemplo
+var nombre = "Juan"; // "nombre" es una variable de tipo string
+nombre = 25; // Ahora la variable "nombre" es de tipo int
+console.log(nombre); // Y por ende, imprime 25 en la consola 
+
+-JavaScript es un lenguaje basado en prototipos
+La estructura basada en prototipos ofrece flexibilidad y capacidad de herencia dinámica. De hecho, es gracias a esta característica que JavaScript puede emular la programación orientada a objetos, una funcionalidad que la mayoría de las personas asocia con lenguajes como Java o C++.
+
+La programación orientada a objetos en JavaScript te permite organizar y estructurar tu código de una manera más modular y reutilizable. Puedes definir clases, crear instancias de esas clases y trabajar con ellas mediante sus propiedades y métodos.
+Ejemplo
+// Definición de una clase en JavaScript 
+class Persona { 
+    constructor(nombre, edad) {
+      this.nombre = nombre; // propiedad (variable interna)
+      this.edad = edad;     // propiedad (variable interna)
+    }
+
+    saludar() { // metodo (funcion) saludar
+      console.log("Hola, mi nombre es " + this.nombre + " y tengo " + this.edad + " años.");
+    }
+  } 
+// Creación de instancias (asignacion de una clase a un objeto) de la clase Persona
+const personal = new Persona("Juan", 30);
+const persona2 = new Persona("María", 25);
+// Llamada al método de instancia
+personal.saludar(); // Imprime: Hola, mi nombre es Juan y tengo 30 años.
+persona2.saludar(); // Imprime: Hola, mi nombre es María y tengo 25 años. 
+En este ejemplo, se define una clase llamada "Persona" que tiene dos propiedades: "nombre" y "edad". La clase también tiene un método llamado "saludar" que imprime un mensaje de saludo en la consola.
+
+Después se crean dos instancias de la clase Persona: "persona1" y "persona2". Cada instancia tiene sus propios valores para las propiedades "nombre" y "edad". Finalmente, se llama al método "saludar" en cada instancia, lo que imprime un mensaje personalizado para cada objeto.
+
+fuente:
+https://www.hackaboss.com/blog/que-es-javascript-para-que-sirve
+
+
+¿Cuáles son algunos tipos de datos JS?
+--------------------------------------
+Tipos de datos en JS:
+Boolean - solo puede tener los valores True o False
+Numérico (number)- representa tanto números enteros como de punto flotante
+BigInt - el tipo “number” no puede representar valores enteros mayores que (253-1) (eso es 9007199254740991), o menor que -(253-1) para negativos. Es un tipo que presenta valores numéricos que son demasiado grandes para ser representados por el tipo de dato number.
+Cadena (string) - es una cadena de caracteres y debe colocarse entre comillas.
+Símbolo	(symbol) - es un tipo de dato único que se puede usar para crear identificadores para propiedades de objetos. Los símbolos no son como cadenas o números, y no se pueden convertir a esos tipos de datos. Esto es lo que los hace ideales para crear identificadores.
+Nulo - solo puede tener el valor Null, valor especial que no pertenece a ninguno de los tipos descritos anteriormente.
+Objeto (object) - El tipo object (objeto) es especial.Todos los demás tipos se llaman “primitivos” porque sus valores pueden contener una sola cosa (ya sea una cadena, un número, o lo que sea). Por el contrario, los objetos se utilizan para almacenar colecciones de datos y entidades más complejas.
+Indefinido (undefined)- representa una variable que no ha sido declarada o a la cual no se le ha asignado un valor.
+
+Ejemplos
+// x es booleano
+x = true;
+// x es numérico
+x = 100;
+// x es bigint
+x = 2 ** 53; // 9007199254740992
+// x es un string o cadena
+let x = "Hola Mundo";
+// x es symbol
+const x = Symbol("foo");
+// x es null
+let x = null;
+// x es objeto
+var x = {
+  nombre: "Marcel",
+  edad: "38",
+  ciudad: "Alaior",
+};
+// x es undefined
+var x;
+
+fuentes:
+https://ifgeekthen.nttdata.com/es/tipos-de-datos-y-operadores-en-javascript#:~:text=En%20JavaScript%20podemos%20decir%20que,%2C%20indefinido%2C%20s%C3%ADmbolo%20y%20objeto.
+https://blog.hubspot.es/website/tipos-de-datos-javascript
+https://es.javascript.info/types
+https://flaming.codes/es/posts/get-to-know-symbols-the-unique-data-type-for-object-properties/
+https://lenguajejs.com/javascript/number/bigint/
+
+¿Qué son las tres funciones de cadena JS?
+-----------------------------------------
+En realidad hay un montón. Algunos ejemplos (ejecutándose desde la consola) son:
+str = "The quick brown fox jumped over the lazy dog" // variable cadena (string)
+str.repeat(5); // Repite 5 veces la cadena str --> "The quick brown fox jumped over the lazy dogThe quick brown fox jumped over the lazy dogThe quick brown fox jumped over the lazy dogThe quick brown fox jumped over the lazy dogThe quick brown fox jumped over the lazy dog"
+
+str.replace('fox', 'wolf'); // Reemplaza en str el texto "fox" por "wolf" -->"The quick brown wolf jumped over the lazy dog"
+
+var str2 = str.concat('again and again'); // Junta a la variable str con "again and again" dejando el resultado en str2
+
+str.charAt(2); // "e" // Muestra el caracter en la posición índice 2 de str
+
+y hay muchas más
+fuente:
+https://basque.devcamp.com/pt-full-stack-development-javascript-python-react/guide/working-string-functions-part-1
+
+¿Qué es un condicional?
+-----------------------
+Un condicional en la programación es una sentencia o grupo de sentencias que puede ejecutarse o no en función del valor de una condición. 
+
+Los tipos más conocidos de condicionales son el SI (IF) y el SEGÚN (case o switch), aunque también podríamos mencionar al lanzamiento de errores como una alternativa más moderna para evitar el "anidamiento" de condicionales.
+
+Los condicionales constituyen junto con los bucles los pilares de la programación estructurada, y su uso es una evolución de una sentencia de lenguaje ensamblador que ejecutaba la siguiente línea o no en función del valor de una condición.
+
+CONDICIONAL IF
+
+La sentencia if se utiliza para comprobar una condición y si la condición es verdadera entonces procesaremos un bloque de sentencias (llamado bloque if), u otro bloque de sentencias alternativas (llamado bloque else). La cláusula else es opcional.
+
+codigo en ejecución
+IF condicion
+    ejecutar proceso1
+ELSE
+    ejecutar proceso2
+código en ejecución
+
+Puede darse el caso de CONDICIONALES ANIDADOS
+Decimos que una estructura condicional es anidada cuando por la rama del verdadero o el falso de una estructura condicional hay otra estructura condicional. Puede haber muchos más anidados.
+IF condición1
+    IF condición2
+	ejecutar proceso1
+    ELSE
+	ejecutar proceso2
+ELSE
+    ejecutar proceso3
+
+fuente:
+https://fundaprograprimsem.blogspot.com/2013/06/condicionales.html
+
+¿Qué es un operador ternario?
+-----------------------------
+El operador condicional (ternario) es el único operador en JavaScript que tiene tres operandos. Este operador se usa con frecuencia como atajo para la instrucción if.
+Sintaxis
+condición ? expr1 : expr2
+
+Parámetros
+condición - Una expresión que se evalúa como true o false.
+
+expr1, expr2 -Expresión con valores de algún tipo.
+
+Se pueden asignar variables dependiendo del resultado de la condición ternaria:
+
+var elvisLives = Math.PI > 4 ? "Sip" : "Nop"; // resultado elvisLives = "Nop"
+Otro ejemplo:
+var stop = false,
+  age = 23;
+
+age > 18 // este es el operador ternacio, se ha dividido en 3 líneas, la 1ª es la condición
+  ? (alert("OK, puedes continuar."), location.assign("continue.html")) //Si la condición es cierta
+  : ((stop = true), alert("Disculpa, eres menor de edad!"));  //Si la condición no es cierta
+
+Conviene poner los resultados de la condición entre paréntesis para facilitar la comprensión ya que pueden haber operarios ternarios anidados:
+user
+    ? (user.admin ? "showing admin controls" : "You need to be an admin")
+    : "you need to be logged in";
+
+fuente:
+https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Conditional_operator
+https://basque.devcamp.com/pt-full-stack-development-javascript-python-react/guide/overview-javascript-ternary-operator
+
+¿Cuál es la diferencia entre una declaración de función y una expresión de función?
+-----------------------------------------------------------------------------------
+// Función por expresión
+//Es probablemente la más utilizada y la más fácil de recordar,
+//sobre todo si ya conoces algún otro lenguaje de programación. 
+//Consiste en declarar la función con un nombre y sus parámetros de entrada 
+//entre paréntesis.
+function greeting(){
+    return "Hi there!";
+}
+console.log(greeting());
+//otro ejemplo
+function add(a, b){ 
+    return a+b;
+}
+console.log(add(5,6)); //11
+// Función por declaración
+// Este tipo ha tomado popularidad y consiste básicamente en guardar una función 
+// en una variable, para así ejecutar la variable como si fuera una función.
+// Ojo no olvidarse del "=" al asignar la función a la variable, así como que al cerrar la funcion
+// con "}" tenga seguido ";", sino dará error!! Suele ser de los errores típicos.
+// Este nuevo recurso ha dado pie a las funciones anónimas.
+var greetingtwo = function () {
+    return "Hi there!";
+};
+console.log(greetingtwo()); //Hi there
+// otro ejemplo
+var my_Sum = function add(a, b) { 
+  return a+b;
+};
+console.log(my_Sum(5,6)); //11
+
+fuente:
+https://blog.hubspot.es/website/funciones-javascript
+
+¿Cuál es la palabra clave 'this'?
+---------------------------------
+Es una palabra clave muy utilizada dentro de funciones y clases, pues tiene un valor flexible. "This" significa "esto" en español y, como su nombre indica, hace referencia al objeto en cuestión. Es decir, si estamos creando cualquier función, la palabra clave this se usará para representar o llamar al objeto que dicha función está modificando. En Python es el equivalente al ".self" de en las clases.
+
+un ejemplo con una variable llamada "ejemplo":
+
+const ejemplo = {
+  color: azul,
+  func: function ( ) {
+    return this.color;
+    },
+};
+
+Esta variable tiene dos propiedades, func y color. Aquí, "this" hace referencia a la constante ejemplo, pues es el objeto al que pertenece en este contexto. Entonces, al hacer que la función nos devuelva la propiedad this.color, el programa entiende que lo que hará realmente es devolvernos la propiedad ejemplo.color.
+
+console.log (ejemplo.func()); // resultado esperado: azul
+
+fuente:
+https://keepcoding.io/blog/que-es-this-en-javascript/#:~:text=This%20significa%20esto%20en%20espa%C3%B1ol,que%20dicha%20funci%C3%B3n%20est%C3%A1%20modificando.
+
+
+EJERCICIO JAVASCRIPT Cree una función JS que incluya 4 argumentos. Suma los dos primeros argumentos, luego los dos segundos y multiplícalos. Si el número creado es mayor que 50, registre la consola "¡El número es mayor que 50!". Si es más pequeño, registre la consola "¡El número es inferior a 50!"
+
