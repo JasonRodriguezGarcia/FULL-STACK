@@ -1,0 +1,25 @@
+Una primera parte que es similar al checkpoint anterior, tenemos que ir ampliando utilización de software, buscador de información, ejemplos te propongo el reto de que intentes crear una "consola" como la que tienes en el curso para practicar ejemplo, te recuerdo que esta documentación debe incluir ejemplos de código, enlaces a recursos relevantes, gráficos para visualizar conceptos y flujos de trabajo, y cualquier otro recurso que ayude a entender mejor el software, lo más completa posible que si tengo que hacer una llamada contigo me lo puedas explicar para aclararme.
+
+¿Qué tipo de bucles hay en JS?
+
+¿Cuáles son las diferencias entre const, let y var?
+
+¿Qué es una función de flecha?
+
+¿Qué es la deconstrucción variable?
+
+¿Qué hace el operador de spread JS?
+
+¿Qué es OOP?
+
+¿Qué es una promesa JS?
+
+¿Qué hacen async y await por nosotros?
+
+EJERCICIO PRÁCTICO:
+
+Cree un bucle for en JS que imprima cada nombre de esta lista. myList = "velma", "scout", "jane", "john", "harry"
+
+Cree un bucle while que recorra la misma lista e imprima también los nombres.
+
+Cree una función de flecha que devuelva "Hello World".
