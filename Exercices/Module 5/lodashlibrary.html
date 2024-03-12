@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Lodash Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+  </head>
+  <body>
+    <!-- http://houston.astros.mlb.com/stats/sortable.jsp?c_id=hou#playerType=ALL&elem=%5Bobject+Object%5D&tab_level=child&click_text=Sortable+Player+hitting&game_type='R'&season=2017&season_type=ANY&league_code='MLB'&sectionType=sp&statType=hitting&page=1&ts=1516406323861&sortColumn=g&sortOrder='desc'&extended=0 -->
+  </body>
+
+  <script>
+    // times
+    randNumber = () => {
+      return Math.round(Math.random() * 100);
+    }
+
+    const sampleNumbers = _.times(5, randNumber);
+
+    // filter
+    const players = [
+      { name: 'Bregman, A',  battingAverage: 0.284 },
+      { name: 'Altuve, J',   battingAverage: 0.346 },
+      { name: 'Springer, G', battingAverage: 0.283 },
+      { name: 'Gurriel, Y',  battingAverage: 0.299 },
+      { name: 'Gonzalez, M', battingAverage: 0.303 }
+    ];
+
+//  codigo original que funciona
+//    const over300 = _.filter(players, player => {
+//      return player.battingAverage > 0.300;
+//    });
+//  codigo alternativo que creo
+    const over300 = _.filter(players, function(o) {
+        return o.battingAverage>0.300;
+    });
+  </script>
+</html>
