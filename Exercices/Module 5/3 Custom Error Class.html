@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Error Management in JavaScript</title>
+  </head>
+  <body>
+  </body>
+  <script>
+    class miDevcampError extends Error { //Extiende Clase Error que ha existe y además la hereda
+      constructor(msg = 'An error occurred a aparecido un error', ...params) { //miDevcampError tiene 2 parametros
+        super(...params); // Pasa los argumentos restantes (incluidos los específicos 
+        this.msg = msg;     //del proveedor) al constructor padre Error
+      }
+    }
+
+    function siteComponent(func) {
+      return func();
+    }
+
+    try {
+      console.log(siteComponent("Opps"));
+    } catch(miError) {
+      throw new miDevcampError('miDevcampError', miError);
+//      throw new miDevcampError('miDevcampError', "miTexto De Error");
+    }
+
+    widget = () => {
+      return '<div>Hi there</div>';
+    }
+
+  </script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Basic Error</title>
+  </head>
+  <body>
+
+  </body>
+
+  <script>
+    function siteComponent(func) { // el parámetro DEBE SER una función
+      return func();  // devuelve la funcion pero antes pasa
+    }                 //  por try (intento ejecución) o catch (en caso de error)
+    widget = () => {
+      return '<div>Hi there</div>';
+    }
+    try {
+      //console.log(siteComponent(widget)); // esta línea funciona
+      console.log(siteComponent("test del error")); // esta línea daría error
+    } catch(miError) {
+      console.log('An error occurred', miError);
+    }
+  </script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>API Communication Demo</title>
+  </head>
+  <body>
+  </body>
+  <script>
+    class miApiError extends Error {
+      constructor(msg = 'An api error occurred', ...params) {
+        super(...params);
+        this.msg = msg;
+      }
+    }
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://api.dailysmarty.com/oops', true);   // no funciona
+//    request.open('GET', 'http://api.dailysmarty.com/posts', true); // funciona
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        console.log (request.status); // check que confirma que pasa por aquí
+        var data = JSON.parse(request.responseText);
+        console.log(data);
+      } else {
+        throw new miApiError('miApiError', `An API error occurred with a status code of ${request.status}`);
+      }
+    };
+    request.send();
+  </script>
+</html>
