@@ -8,7 +8,7 @@
   </body>
   <script>
     class miApiError extends Error {
-      constructor(msg = 'An api error occurred', ...params) {
+      constructor(msg='An api error occurred', ...params) {
         super(...params);
         this.msg = msg;
       }
