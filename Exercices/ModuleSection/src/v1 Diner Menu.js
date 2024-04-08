@@ -101,4 +101,3 @@ arrayBillPrinting.push(`\nTotal .....${totalCost}`);
 //alert(totalCost);
 alert(arrayBillPrinting);
 
-

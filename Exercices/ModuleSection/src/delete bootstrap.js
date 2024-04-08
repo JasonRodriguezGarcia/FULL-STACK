@@ -8,41 +8,24 @@ const menuType = ["Breakfast","Lunch","Dinner"];
 // position 4 = sides prices
 // position 5 = sides comments
 const menuBreakfast = [
-        ["Coffee with milk", "Chocolate", "Smoothie"],                  // main breakfast description
-        [2, 1.5, 3],                                                    // main prices
-        ["Good coffee!!", "Sweat drink!!", "Looks very good"],          // main comments
-        ["Croassant", "Creps", "Toast with strawberry jam"],            // sides breakfast description
-        [1.5, 3, 4],                                                    // sides prices
-        ["It's so crunchy", "Tastes very good", "Good choice"]          // sides comments
+        ["Coffee with milk", "Chocolate"],      // main breakfast description
+        [2, 1.5],                               // main prices
+        ["Good coffee!!", "Sweat drink!!"],     // main comments
+        ["Croassant", "Creps"],                 // sides breakfast description
+        [1.5, 3],                               // sides prices
+        ["It's so crunchy", "Tastes very good"] // sides comments
 ];
-const menuLunchDinner = [                                               // lunch and dinner uses same items
-        ["Spagetti carbonara", "Green salad", "Rice three delicious"],  // main lunch/Dinner despcription
-        [7, 5, 4],                                                      // main prices
-        ["Molto benne..", "Healthy choise!!", "Delicious!!"],           // main comments
-        ["Fries", "Fish", "Grilled rib"],                               // sides lunch/Dinner description
-        [6 , 8, 9],                                                     // sides prices
-        ["Good choise!!","From the sea to the table !!", "Best ones in the world"] // sides comments
+const menuLunchDinner = [                       // lunch and dinner uses same items
+        ["Spagetti carbonara", "Green salad"],  // main lunch/Dinner despcription
+        [7, 5],                                 // main prices
+        ["Molto benne..", "Healthy choise!!"],  // main comments
+        ["Fries", "Fish"],                      // sides lunch/Dinner description
+        [6 , 8],                                // sides prices
+        ["Good choise!!","From the sea to the table !!"] // sides comments
 ]
 const arraySelections = [], arrayBill = [], arrayBillPrinting = [];
-const arrayDinerTimeRange = [
-        "05:00",
-        "11:59"
-]
-const arrayLunchTimeRange = [
-        "12:00",
-        "18:59"
-]
-const arrayDinnerTimeRange = [
-        "19:00",
-        "12:59"
-]
-const arrayClosedTimeRange = [
-        "01:00",
-        "04:59"
-]
 var txtInitialMsg = `Welcome to our `, txtInitialMsg2 = `\u03A9 Restaurant XxX \n`;
-//var menuTypeSelect = 0, menuMainSelect = 0, menuSideSelect = 0;
-var menuTypeSelect = -1, menuMainSelect = -1, menuSideSelect = -1;
+var menuTypeSelect = 0, menuMainSelect = 0, menuSideSelect = 0;
 var dinnerAdditionalCost = 2, totalCost = 0, position = 0;
 var longitudMainSelect = 0;
 /**
@@ -94,10 +77,11 @@ const stringCommentPrice = (typeSelect, menuMainSideChoice, mainOrSide) => {
 }
 /**
 /* To create Bill string for main/side and price selected 
- * @param {number} typeSelected - if used for Breakfast or LunchDinner
- * @param {string} mainOrSide - indicates if used for main or side
+ * @param {number} typeSelect - if used for Breakfast or LunchDinner
  * @param {number} menuMainSideChoice - chose in main/side prompt
+ * @param {string} mainOrSide - indicates if used for main or side
  */
+
 const lineBillCreator = (typeSelected, mainOrSide, menuMainSideChoice) => {
         // positions selection for menuBreakfast & menuLunchDinner array items
         // depending from mainOrSide
@@ -116,34 +100,15 @@ const lineBillCreator = (typeSelected, mainOrSide, menuMainSideChoice) => {
                 }$`;
 
 }
-/**
-/*
- * Entrance data validation
- * @param {number} typeSelection - data to validate
- */
-const dataValidator = (typeSelection) => {
-        var errorMsg = "Invalid selected Option";
-        if (typeSelection == "" || typeSelection < 0) { // no se introduce nada y se da ENTER directamente
-                alert(errorMsg);
-                return true;
-        }
-        if (typeSelection == 0 || typeSelection <= menuType.length-1) { // opción 0 es correcta O
-                return false;                                           // opción dentro del rango de opciones
-        }
-        alert(errorMsg);
-        return true;
-}
 // *********************
 // Main program starting
 // *********************
 alert(txtInitialMsg+txtInitialMsg2);
-//prompt(`${txtInitialMsg+txtInitialMsg2}\n\n`+`Please, type local time (hh:mm)`);
 do {    //Menu type selection (Breakfast or LunchDinner), stored in menuTypeSelect and USED
         // IN A LOT OF CODE to indicate array Breakfast or LunchDinner to be used
         menuTypeSelect = prompt(`Please select menu type:\n${stringOptionsGenerator(menuType, true)}`);
-} while (dataValidator(menuTypeSelect));
+} while (menuTypeSelect < 0 || menuTypeSelect >= menuType.length || menuTypeSelect === "");
 // Storing menu type breakfast or lunch/dinner in array for using later for bill printing
-//alert(menuTypeSelect);
 arraySelections.push(menuTypeSelect);
 // Showing main available options for menu type selected, 
 // First parameter menuTypeSelect (breakfast or lunch/dinner)
