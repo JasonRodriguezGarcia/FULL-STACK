@@ -24,8 +24,8 @@ const menuLunchDinner = [                                               // lunch
         ["Good choise!!","From the sea to the table !!", "Best ones in the world"] // sides comments
 ]
 const arraySelections = [], arrayBill = [], arrayBillPrinting = [];
-const arrayDinerTimeRange = [
-        "05:00",
+const arrayBreakfastTimeRange = [
+        "06:00",
         "11:59"
 ]
 const arrayLunchTimeRange = [
@@ -34,11 +34,7 @@ const arrayLunchTimeRange = [
 ]
 const arrayDinnerTimeRange = [
         "19:00",
-        "12:59"
-]
-const arrayClosedTimeRange = [
-        "01:00",
-        "04:59"
+        "23:59"
 ]
 var txtInitialMsg = `Welcome to our `, txtInitialMsg2 = `\u03A9 Restaurant XxX \n`;
 var menuTypeSelect = -1, menuMainSelect = -1, menuSideSelect = -1;
@@ -153,11 +149,11 @@ const localTimeValidator = (timeToValidate) =>{
                 return true;
         }
         if (hourToValidate >= 0 && hourToValidate < 24 && minutesToValidate >= 0 && minutesToValidate < 60) {
-                if (timeToValidate >= "06:00" &&  timeToValidate <= "11:59"){
+                if (timeToValidate >= arrayBreakfastTimeRange[0] &&  timeToValidate <= arrayBreakfastTimeRange[1]){
                         menuTypeSelect = 0; } // breakfast;
-                else if (timeToValidate >= "12:00" &&  timeToValidate <= "17:59") {
+                else if (timeToValidate >= arrayLunchTimeRange[0] &&  timeToValidate <= arrayLunchTimeRange[1]) {
                         menuTypeSelect = 1; } // lunch;
-                else if (timeToValidate >= "18:00" &&  timeToValidate <= "23:59") {
+                else if (timeToValidate >= arrayDinnerTimeRange[0] &&  timeToValidate <= arrayDinnerTimeRange[1]) {
                         menuTypeSelect = 2; } // diner;
                 else {
                         alert(" Sorry but, the restaurant is closed ...");
@@ -165,6 +161,7 @@ const localTimeValidator = (timeToValidate) =>{
                 }
                 return false;
         }
+
         alert(errorMsg);
         return true;
 }
@@ -172,15 +169,19 @@ const localTimeValidator = (timeToValidate) =>{
 // Main program starting
 // *********************
 //alert(txtInitialMsg+txtInitialMsg2);
+// Menu type selection (Breakfast or LunchDinner), stored in menuTypeSelect and USED
+// IN A LOT OF CODE to indicate array Breakfast or LunchDinner to be used
+
 do {
         localTime = prompt(`${txtInitialMsg+txtInitialMsg2}\n\n`+`Please, type local time (hh:mm 24h format)`);
 } while (localTimeValidator(localTime));
 //Menu type selection (Breakfast or LunchDinner), stored in menuTypeSelect and USED
 // IN A LOT OF CODE to indicate array Breakfast or LunchDinner to be used
+
 // Storing menu type breakfast or lunch/diner in array for using later for bill printing
-// BORRAR  menuTypeSelect = "0"; //por ahora ponemos por defecto que es breakfast
 arraySelections.push(menuTypeSelect);
-// Showing main available options for menu type selected, 
+
+// Showing main available options for menu type selected,  using stringOptionsGeneratorWrapper
 // First parameter menuTypeSelect (breakfast or lunch/diner)
 // as second parameter position for main or side in appropiate array (menuBreakfast or menuLunchDinner)
 alert(`It's time for: ${menuType [menuTypeSelect]}\n`+
@@ -190,32 +191,31 @@ alert(`It's time for: ${menuType [menuTypeSelect]}\n`+
         `${stringOptionsGeneratorWrapper(menuTypeSelect , 3)}`+
         `\n`);
 do {    // Main selection, stored in menuMainSelect
-        // Next line could be improved in order to don't repeat code but
-        // due to still I don't know how to return 2 values from function,
-        // I expect to learn how to do it in a near future...
         menuMainSelect = prompt(`Please select Main:\n`+
                 `${menuTypeSelect == 0 
                         ? stringOptionsGenerator(menuBreakfast[0], true)
                         : stringOptionsGenerator(menuLunchDinner[0], true)
                 }`);
 } while (dataValidator(menuMainSelect, "main"));
+
 // Storing main in array for using later for bill printing
 arraySelections.push(menuMainSelect);
+
 // Showing comment and price for main selected
 alert(`${stringCommentPrice(menuTypeSelect, menuMainSelect, "main")}`);
 do {    //Side selection, stored in menuSideSelect
         menuSideSelect = prompt(`Please select Side:\n`+
                 `${menuTypeSelect == 0 
-                        ? (longitudMainSelect = menuBreakfast[3].length,
-                        stringOptionsGenerator(menuBreakfast[3], true))
-                        : (longitudMainSelect = menuLunchDinner[3].length,
-                        stringOptionsGenerator(menuLunchDinner[3], true))
-                }`);
+                        ? stringOptionsGenerator(menuBreakfast[3], true)
+                        : stringOptionsGenerator(menuLunchDinner[3], true)
+                }`);                
 } while (dataValidator(menuSideSelect, "side"));
+
 // Storing side in array for using later for bill printing
 arraySelections.push(menuSideSelect);
 // Showing comment and price for side selected
 alert(`${stringCommentPrice(menuTypeSelect, menuSideSelect, "side")}`);
+
 //
 // Creating Bill lines ant storing them in arrayBill
 //
@@ -248,5 +248,5 @@ alert(arrayBillPrinting);
 // The end ... Even if this code it's right or wrong, I enjoyed typing this code
 // Pls, any comments will be highly appreciated, it is for sure this exercice could be 
 // done by another way
-// Pending menu maintenance options (create, modifications, deletions, ...)
+// Pending menu maintenance options (create, modificate, delete, ...)
 // See you soon ...

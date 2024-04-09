@@ -148,19 +148,6 @@ const localTimeValidator = (timeToValidate) =>{
                 alert(errorMsg);
                 return true;
         }
-/*        if (hourToValidate >= 0 && hourToValidate < 24 && minutesToValidate >= 0 && minutesToValidate < 60) {
-                if (timeToValidate >= "06:00" &&  timeToValidate <= "11:59"){
-                        menuTypeSelect = 0; } // breakfast;
-                else if (timeToValidate >= "12:00" &&  timeToValidate <= "17:59") {
-                        menuTypeSelect = 1; } // lunch;
-                else if (timeToValidate >= "18:00" &&  timeToValidate <= "23:59") {
-                        menuTypeSelect = 2; } // diner;
-                else {
-                        alert(" Sorry but, the restaurant is closed ...");
-                        logout();
-                }
-                return false;
-        }*/
         if (hourToValidate >= 0 && hourToValidate < 24 && minutesToValidate >= 0 && minutesToValidate < 60) {
                 if (timeToValidate >= arrayBreakfastTimeRange[0] &&  timeToValidate <= arrayBreakfastTimeRange[1]){
                         menuTypeSelect = 0; } // breakfast;
