@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title></title>
+</head>
+
+<body>
+  <div>esto es una lína mía</div>
+  <button id="dateBtn">Click for Date</button>
+  <div id="dateComponent"></div>
+  <!-- <button onclick="renderDate()">Click for Date</button> -->
+</body>
+
+<script>
+  // renderDate = () => {
+  //   dateElement.innerHTML = Date();
+  // }
+  activo = false;
+  const dateElement = document.getElementById('dateComponent');
+  const dateBtn = document.getElementById('dateBtn');
+  dateBtn.addEventListener('click', (event) => {
+    if (activo) {
+      dateElement.innerHTML = "";
+      activo = false;
+    }
+    else {
+      dateElement.innerHTML = Date();
+      activo = true;
+    }
+  });
+</script>
+</html>
