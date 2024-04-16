@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <title></title>
+</head>
+
+<body>
+  <div class="widget">
+    <input type="text" id="chat-input">
+    <button id="msgBtn" onclick="sendMessage()">Submit</button>
+    <div class="chat-wrapper"></div>
+  </div>
+</body>
+
+<script>
+  function sendMessage() {
+    const newDiv = document.createElement("div");               //En newDiv crea elemento div
+    newDiv.classList.add('chatMsg');                            //En newDiv añade una clase chatMsg
+    let chatInput = document.querySelector('#chat-input').value;//En chaInput selecciona el valor del id chat-input
+    const newContent = document.createTextNode(chatInput);      //En newContent crea un nodo con chatInput 
+    newDiv.appendChild(newContent);                             //En newDiv añade un Child con newContent
+    const widget = document.querySelector(".widget");           //En widget selecciona widget
+    let chatWrapper = document.querySelector(".chat-wrapper");  //En chatWrapper selecciona class chat-wrapper
+    document.querySelector('#chat-input').value = '';           //En chat-input selecciona el valor y lo vacía
+    if (document.querySelectorAll('.chatMsg').length > 0) {     //Si la longitud de chatMsg es >0
+      chatWrapper = document.querySelectorAll('.chatMsg')[0];   // Entonces chatWrapper = a chatMSG[0]
+    }                                                           //    esto es para 
+    widget.insertBefore(newDiv, chatWrapper);                   //Inserta el newdiv en chat-Wrapper
+  }
+</script>
+
+</html>
