@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title></title>
+</head>
+<body>
+    <div id="wrapper"></div>
+</body>
+<script>
+    const selectId = document.querySelector("#wrapper");
+    const newSpan = document.createElement("span");
+    newSpan.className = "content";
+    selectId.appendChild(newSpan);
+    newSpanText = document.createTextNode("You got this!");
+    newSpan.appendChild(newSpanText);
+
+</script>
+</html>
