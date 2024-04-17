@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title></title>
+</head>
+<body>
+  <div class="post-wrapper">
+    <div class="post"></div>
+    <div class="post"></div>
+    <div class="post"></div>
+</div>
+</body>
+<script>
+/* Ejercicio de Codificacion
+Remove all elements with the class name of post. 
+Then inside the wrapper add a p tag 
+that has a class name of flash-message
+and says "Posts coming soon!"
+*/
+const selectingPosts= document.querySelectorAll(".post");           // Selecting all class "post"
+selectingPosts.forEach(classChild => classChild.remove());          // Deleting all selected "post"
+const newP = document.createElement("p");                           // Creating "p" element stored in newP
+newP.className="flash-message";                                     // Adding class "flash-message" to "p" element
+const selectingPostWrapper = document.querySelector(".post-wrapper");//Selecting "post-wrapper" class
+selectingPostWrapper.appendChild(newP);                             // Adding child to "post-wrapper" with "p" element
+newContentP = document.createTextNode("Posts coming soon!");        // Creating TextNode with "Post comming soon!"
+newP.appendChild(newContentP);                                      // Adding TextNode to newP
+</script>
+</html>
