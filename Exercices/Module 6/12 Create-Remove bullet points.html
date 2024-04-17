@@ -33,15 +33,13 @@
 const selectLI = document.querySelectorAll(".todoItem");
 selectLI.forEach(li => {
   li.addEventListener('click', (elementoli) => {
-    newCompleted= document.createElement("li");
-    newCompleted.className="completedItem";
-    newCompleted.appendChild(elementoli.target);
-    console.log(elementoli.target);
-    console.log(newCompleted);
+    newCompleted = document.createElement("li");
+    newCompleted.className ="completedItem";
+    newCompleted.innerHTML = li.innerHTML;
     selectCompleted = document.querySelector(".completed");
     selectCompleted.appendChild(newCompleted);
+    li.remove();
   });
 });
 </script>
-
 </html>
