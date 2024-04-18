@@ -4,14 +4,12 @@
 <head>
   <meta charset='UTF-8'>
   <title></title>
-
   <style>
     .todoItem:hover {
       cursor: pointer;
     }
   </style>
 </head>
-
 <body>
   <div class="todos">
     <h2>Pending Todos</h2>
@@ -30,16 +28,16 @@
   </ul>
 </body>
 <script>
-const selectLI = document.querySelectorAll(".todoItem");
-selectLI.forEach(li => {
-  li.addEventListener('click', (elementoli) => {
-    newCompleted = document.createElement("li");
-    newCompleted.className ="completedItem";
-    newCompleted.innerHTML = li.innerHTML;
-    selectCompleted = document.querySelector(".completed");
-    selectCompleted.appendChild(newCompleted);
-    li.remove();
-  });
-});
+  const todos = document.querySelectorAll('.todoItem');
+  const completedTodos = document.querySelector('.completed');
+  const completedTodoWrapper = document.querySelector('.completedTodoWrapper');
+
+  todos.forEach(todo => todo.addEventListener('click', (event) => {
+    let completedTodo = document.createElement('li');
+    let todoContent = document.createTextNode(todo.textContent);
+    completedTodo.appendChild(todoContent);
+    completedTodoWrapper.insertBefore(completedTodo, completedTodos);
+    todo.remove();
+  }))
 </script>
 </html>
