@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title></title>
+</head>
+<body>
+  <h1>Hi there</h1>
+</body>
+<script>
+    myArray = [1, 2, 3, 4, 5];
+    var arrayInitialPointer = 0;
+    var arrayFinalPointer = (myArray.length)-1;
+//    console.log(arrayFinalPointer);
+    var switchInitialFinal = 0;
+    var index = 0;
+
+    const arrayPopper = () => {
+        if (switchInitialFinal == 0){
+            index = arrayInitialPointer;
+            ++arrayInitialPointer ;
+            switchInitialFinal = 1;
+        }
+        else {
+            index = arrayFinalPointer;
+            --arrayFinalPointer;
+            switchInitialFinal = 0;
+
+        }
+        return myArray[index];
+/*        return (`${(switchInitialFinal == 0 
+                    ?   (myArray[arrayInitialPointer],
+                        arrayInitialPointer ++,
+                        switchInitialFinal =1 )
+                    :   (myArray[arrayFinalPointer],
+                        arrayFinalPointer --,
+                        switchInitialFinal = 0)
+                    )}`);*/
+    }
+    /*to be showed
+    1
+    5
+    2
+    4
+    3 */
+    console.log(arrayPopper());
+    console.log(arrayPopper());
+    console.log(arrayPopper());
+    console.log(arrayPopper());
+    console.log(arrayPopper());
+    console.log(arrayPopper());
+</script>
+</html>

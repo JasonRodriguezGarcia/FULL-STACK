@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title></title>
+</head>
+<body>
+  <h1>Hi there</h1>
+</body>
+<script>
+        /*to be showed
+    1
+    5
+    2
+    4
+    3 */
+    class ArrayPopper {
+        constructor(arr) { // defining parameters
+        this.arr = arr;
+        this.atBeginning = true;
+        }
+        togglePopper() {
+        this.atBeginning = !this.atBeginning;
+        return this.atBeginning ? this.arr.pop() : this.arr.shift();
+        }
+    }
+    const ap = new ArrayPopper([1, 2, 3, 4, 5]);
+    console.log(ap.togglePopper()); //? 1
+    console.log(ap.togglePopper()); //? 5
+    console.log(ap.arr); //? [2, 3, 4]
+    console.log(ap.togglePopper()); //? 2
+    console.log(ap.togglePopper()); //? 4
+    console.log(ap.togglePopper()); //? 3
+    console.log(ap.arr); //? []
+</script>
+</html>

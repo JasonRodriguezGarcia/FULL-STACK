@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title></title>
+</head>
+<body>
+  <!--<h1>Hi there</h1> -->
+</body>
+<script>
+const toCapital = str => {
+  const words = str.split(" "); // Pasa str a array
+  return words.map(word => word[0].toUpperCase() + word.slice(1)).join(" "); // +" " no vale
+};
+
+const shortStr = "Hi there";
+console.log(toCapital(shortStr)); // Hi There
+
+const longStr = "the quick brown fox jumped over the lazy dog";
+console.log(toCapital(longStr)); // The Quick Brown Fox Jumped Over The Lazy Dog</script>
+</html>
