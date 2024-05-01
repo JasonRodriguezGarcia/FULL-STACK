@@ -15,3 +15,5 @@ menus = [
      sidesPrices: [6 , 8, 9],
      sidesComments: ["Good choise!!","From the sea to the table !!", "Best ones in the world"]}
 ]
+
+alert(menus[0].main[0]);
