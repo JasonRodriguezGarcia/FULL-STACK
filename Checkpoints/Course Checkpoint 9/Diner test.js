@@ -17,3 +17,6 @@ menus = [
 ]
 
 alert(menus[0].main[0]);
+
+const myMain = "main";
+alert(menus[0][myMain]);
