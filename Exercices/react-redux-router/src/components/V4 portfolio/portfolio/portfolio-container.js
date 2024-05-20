@@ -63,19 +63,20 @@ export default class PortfolioContainer extends Component {
     }
 
     return (
-        <div className='portfolio-items-wrapper'>
-          <button className="btn" onClick={() => this.handleFiltr0("eCommerce")}>
-            eCommerce
-          </button>
-          <button className="btn" onClick={() => this.handleFiltr0("Scheduling")}>
-            Scheduling
-          </button>
-          <button className="btn" onClick={() => this.handleFiltr0("Enterprise")}>
-            Enterprise
-          </button>
-          
-          {this.portfolioItems()} 
-        </div>
+      <div>
+        <h2>{this.state.pageTitle}</h2>
+
+        <button onClick={() => this.handleFiltr0("eCommerce")}>
+          eCommerce
+        </button>
+        <button onClick={() => this.handleFiltr0("Scheduling")}>
+          Scheduling
+        </button>
+        <button onClick={() => this.handleFiltr0("Enterprise")}>
+          Enterprise
+        </button>
+        <div className='portfolio-items-wrapper'>{this.portfolioItems()} </div>
+      </div>
       /*<button onClick={this.handleFilter('eCommerce')}>eCommerce</button> Don't work
         The reason why is it has to deal with how JavaScript manages functions that have parentheses.
         Whenever you have this type of syntax what would happen is the page would load and then JavaScript

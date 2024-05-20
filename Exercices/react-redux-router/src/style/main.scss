@@ -1,4 +1,7 @@
+// Be care with files order, to don't be missing when components are called
 @import "./variables.scss";
+@import "./mixins.scss";
 @import "./base.scss";
+@import "./button.scss";
 @import "./navigation.scss";
 @import "./portfolio.scss";
