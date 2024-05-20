@@ -47,13 +47,6 @@ export default class PortfolioContainer extends Component {
 
   portfolioItems() {
     return this.state.data.map(item => {
-//      debugger;
-      // return <PortfolioItem 
-      //         key={item.id}
-      //         title={item.name}
-      //         url={item.url}
-      //         slug={item.id}
-      //       />;
       return <PortfolioItem key={item.id} item={item} />;
     });
   }
@@ -82,8 +75,7 @@ export default class PortfolioContainer extends Component {
         <button onClick={() => this.handleFiltr0("Enterprise")}>
           Enterprise
         </button>
-
-        {this.portfolioItems()}
+        <div className='portfolio-items-wrapper'>{this.portfolioItems()} </div>
       </div>
       /*<button onClick={this.handleFilter('eCommerce')}>eCommerce</button> Don't work
         The reason why is it has to deal with how JavaScript manages functions that have parentheses.

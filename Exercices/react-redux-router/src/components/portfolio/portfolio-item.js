@@ -1,32 +1,48 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 // this is a functional component, and simple function that allows us
 // less functionality than a class function, it allows to:
 // render content, pass data, images, info ...
-export default function(props) { // props are like parameters
+export default class PortfolioItem extends Component { // props are like parameters
+  constructor(props) {
+    super(props);
 
-  const {id, description, thumb_image_url, logo } = props.item;
-  return (
-    // attending to props title and url came from outside (old version)
-    // <div>
-    //   <h3>{props.title}</h3> 
-    //   <h4>{props.url}</h4>
-    //   <Link to={`/portfolio/${props.slug}`}>Link</Link>
-    // </div>
+    this.state = {
+      portfolioItemClass: ""
+    };
+  }
 
-    // Data we will need:
-    // - background image: thumb_image_url
-    // - logo
-    // - description: description
-    // - id: id
-    
-    <div>
-      <div>
-        <img src={thumb_image_url} />
-        <img scr={logo} />
-        {description}
+  handleMouseEnter () {
+    this.setState({ portfolioItemClass: "image-blur"});
+  }
+  handleMouseLeave () {
+    this.setState({ portfolioItemClass: ""});
+  }
+
+  render() {
+    const {id, description, thumb_image_url, logo_url } = this.props.item;
+    return (
+      <div className="portfolio-item-wrapper"
+        onMouseEnter={() => this.handleMouseEnter()}
+        onMouseLeave={() => this.handleMouseLeave()}
+      >
+
+        {/* Adding backgroundImage to the style dynamically with self-closed <div>, that why for {{ and }} */}
+        <div 
+          className={"portfolio-img-background " + this.state.portfolioItemClass}
+          style={{
+            backgroundImage: "url(" + thumb_image_url + ")"
+          }}
+        />
+
+        <div className="img-text-wrapper">
+          <div className="logo-wrapper">
+            <img src={logo_url} />
+          </div>
+
+          <div className="subtitle">{description}</div>
+        </div>
       </div>
-      <Link to={`/portfolio/${id}`}>Link</Link>
-    </div>
-  );
+    );
+  }
 }

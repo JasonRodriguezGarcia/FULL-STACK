@@ -1,9 +1,9 @@
 body {
-  overflow-x: hidden;
-  font-weight: normal;
+  margin: 0px;
+  font-family: "Titillium Web", sans-serif;
+}
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  -webkit-tap-highlight-color: transparent;
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
 }

@@ -6,7 +6,6 @@ import PortfolioContainer from "../portfolio/portfolio-container";
 export default function() { // props are like parameters
   return (
     <div>
-      <h2>HomePeich</h2>
       <PortfolioContainer/>
     </div>
   );
