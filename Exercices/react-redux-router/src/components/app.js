@@ -31,7 +31,7 @@ export default class App extends Component {
   }
 
   handleUnsuccessfulLogin() {
-    this.state ({
+    this.setState ({
       loggedInStatus: "NOT_LOGGED_IN"
     })
   }
