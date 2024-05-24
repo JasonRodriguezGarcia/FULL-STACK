@@ -11,11 +11,11 @@
       border-bottom: 1px solid transparent;
       transition: 0.5s ease-in-out;
       margin-right: 20px;
-      text-transform: uppercase;
+      text-transform: uppercase; // change text to UPPERCASE
       font-size: 0.9rem;
   
       a {
-        color: $grey;         //variable $grey used
+        color: $grey;         // variable $grey used
         text-decoration: none;
         &:hover {
           color: black;

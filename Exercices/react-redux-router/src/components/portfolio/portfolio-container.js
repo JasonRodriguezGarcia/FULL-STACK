@@ -37,7 +37,7 @@ export default class PortfolioContainer extends Component {
       .get("https://jasonrodriguez.devcamp.space/portfolio/portfolio_items")
       .then(response => {
         this.setState({
-          data: response.data.portfolio_items
+          data: response.data.portfolio_items // This portfolio_items is the one from the replied data
         });
       })
       .catch(error => {
@@ -50,7 +50,12 @@ export default class PortfolioContainer extends Component {
       return <PortfolioItem key={item.id} item={item} />;
     });
   }
-
+  // https://keepcoding.io/blog/estado-y-ciclo-de-vida-de-componentes-en-react/
+  // La función componentDidMount se lanzaba después de que el componente se montara en el DOM
+  // y se renderizara por primera vez. Dentro de esta función podíamos meter cualquier sección de 
+  // código que quisiéramos ejecutar justo en ese momento del ciclo de vida. Este código puede no 
+  // tener que ver exactamente con aquello que estamos renderizando, pero puede ser necesario para 
+  // introducir datos a nuestro proyecto. Un ejemplo de esto sería una llamada a una API.
   componentDidMount() {
     this.getPortfolioItems();
   }
@@ -61,7 +66,7 @@ export default class PortfolioContainer extends Component {
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
-
+//    this.getPortfolioItems(); <<-- now componentDidMount() is used
     return (
         <div className='portfolio-items-wrapper'>
           <button className="btn" onClick={() => this.handleFiltr0("eCommerce")}>
