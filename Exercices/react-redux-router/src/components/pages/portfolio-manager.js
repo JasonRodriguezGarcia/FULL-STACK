@@ -11,11 +11,32 @@ export default class PortfolioManager extends Component {
       portfolioItems: []
     };
 
-    this.handleSuccesfulFormSubmission=this.handleSuccesfulFormSubmission.bind(this);
-    this.handleFormSubmissionError=this.handleFormSubmissionError.bind(this);
+    this.handleSuccesfulFormSubmission = this.handleSuccesfulFormSubmission.bind(this);
+    this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
-  handleSuccesfulFormSubmission(portfolio_item) {
+  handleDeleteClick(portfolioItem) {
+//    console.log("handleClick ***", portfolio_item);
+  axios
+    .delete(
+      `https://api.devcamp.space/portfolio/portfolio_items/${portfolioItem.id}`,
+      { withCredentials: true }
+    )
+    .then(response => {
+      this.setState({
+        portfolioItems: this.state.portfolioItems.filter(item => {
+          return item.id !== portfolioItem.id;
+        })
+      });
+      return response.data; // Good practices just return something
+    })
+    .catch(error => {
+      console.log("handleDeleteClick error", error);
+    });
+}
+
+  handleSuccesfulFormSubmission(portfolioItem) {
     // update portfolioItems state
     // add portfolioItems to the list
     alert("GRABANDO REGISTRO");
@@ -27,7 +48,7 @@ export default class PortfolioManager extends Component {
           // in React we add portfolio_item as an array item (between [])
           // to be added to the begining of portfolioItems array with concat
           // ADDING AND ARRAY ITEM TO AN ARRAY
-          portfolioItems: [portfolio_item].concat(this.state.portfolioItems)
+          portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
           // but the order dissapears is we refresh with F5 and it will appears
           // at the end, that is the normal behaviour
           // because the order in portfolioItems change each time the API
@@ -66,8 +87,9 @@ export default class PortfolioManager extends Component {
             handleFormSubmissionError={this.handleFormSubmissionError}/>
         </div>
         <div className='right-column'>
-          <PortfolioSidebarList data={this.state.portfolioItems}/>
-          {/* <div>LISTADO....</div> */}
+          <PortfolioSidebarList 
+            handleDeleteClick={this.handleDeleteClick}
+            data={this.state.portfolioItems}/>
         </div>
       </div>
     )

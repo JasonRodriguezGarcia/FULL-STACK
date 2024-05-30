@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 // import moment from "moment";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from "axios";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FortAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 // import PortfolioContainer from './portfolio/portfolio-container';
 import NavigationContainer from './navigation/navigation-container';
@@ -14,6 +17,7 @@ import PortfolioDetail from './portfolio/portfolio-detail';
 import Auth from './pages/auth';
 import NoMatch from './pages/no-match';
 
+library.add(faTrash, faSignOutAlt);
 
 export default class App extends Component {
   constructor(props) {
