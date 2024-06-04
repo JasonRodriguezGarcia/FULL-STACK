@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter } from "react-router";  // ROUTER IS CONVERTED TO AN HOC (HIGHER ORDER COMPONENT) "withXXXXXX" is a HOc
 import { NavLink } from 'react-router-dom'; // ACTUAL COMPONENT
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const NavigationComponent = (props) => {
   const dynamicLink = (route, linkText) => {
@@ -60,15 +62,14 @@ const NavigationComponent = (props) => {
             ) : null}
       </div>
 
-      {/* <div className='right-side'>
-        JASON RG
-      </div> */}
       <div className="right-side">
         [ JASON RG ]
         {props.loggedInStatus === "LOGGED_IN" ? (
-//          <a onClick={handleSignOut}>[ Sign Out ]</a>
-          <button onClick={handleSignOut}>Sign Out</button>
-        ) : null}
+          <a onClick={handleSignOut}>
+            <FontAwesomeIcon icon="sign-out-alt" />
+            {/* <FontAwesomeIcon icon={faSignOutAlt} /> */}
+        </a>
+      ) : null}
       </div>
 
     </div>

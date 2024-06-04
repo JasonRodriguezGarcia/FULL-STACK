@@ -18,7 +18,10 @@ export default class PortfolioForm extends Component {
       url: "",
       thumb_image: "",
       banner_image: "",
-      logo: ""
+      logo: "",
+      editMode: false,
+      apiUrl: "https://jasonrodriguez.devcamp.space/portfolio/portfolio_items",
+      apiAction: "post"    
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,12 +29,68 @@ export default class PortfolioForm extends Component {
     this.handleThumbDrop = this.handleThumbDrop.bind(this);
     this.handleBannerDrop = this.handleBannerDrop.bind(this);
     this.handleLogoDrop = this.handleLogoDrop.bind(this);
+    this.deleteImage = this.deleteImage.bind(this);
 
     this.thumbRef = React.createRef();
     this.bannerRef = React.createRef();
     this.logoRef = React.createRef();
 
   }
+
+  deleteImage(imageType) {
+    axios
+      .delete(
+        `https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state
+          .id}?image_type=${imageType}`,
+        { withCredentials: true }
+      )
+      .then(response => {
+        this.setState({
+          [`${imageType}_url`]: ""
+        });
+      })
+      .catch(error => {
+        console.log("deleteImage error", error);
+      });
+  }
+
+  componentDidUpdate() { // only 1st time
+    debugger;
+    console.log(this.props.portfolioToEdit);
+    if (Object.keys(this.props.portfolioToEdit).length > 0) {
+      const {
+        id,
+        name,
+        description,
+        category,
+        position,
+        url,
+        thumb_image_url,
+        banner_image_url,
+        logo_url
+        
+      } = this.props.portfolioToEdit;
+
+      this.props.clearPortfolioToEdit();
+
+      this.setState({
+        id: id,             //null check in
+        name: name || "",   //case null = ""
+        description: description || "",
+        category: category || "eCommerce",
+        position: position || "",
+        url: url || "",
+        editMode: true,
+        apiUrl: `https://jasonrodriguez.devcamp.space/portfolio/portfolio_items/${id}`,
+        apiAction: "patch",
+        thumb_image_url: thumb_image_url || "",
+        banner_image_url: banner_image_url || "",
+        logo_url: logo_url || ""
+
+      });
+    }
+  }
+  
   //
   // Dropzone methods needed to work
   handleThumbDrop() {
@@ -86,28 +145,31 @@ export default class PortfolioForm extends Component {
     if (this.state.logo) {
       formData.append("portfolio_item[logo]", this.state.logo);
     }
-    console.log(formData);
-
     return formData;
   }
 
   handleChange(event) {
     this.setState ({
-      // whatever the item is, it will receive it's value
+      // whatever the item in event is, it will receive it's value
       [event.target.name]: event.target.value
     })
   }
 
   handleSubmit(event) {
-    axios
-      .post(
-        "https://jasonrodriguez.devcamp.space/portfolio/portfolio_items",
-        this.buildForm(), // Sending formData
-        { withCredentials: true } // Using credentials from login Cookie
-      )
-      .then(response => { // that is that gets returned when we have a succesful record created
-                          // and we pass to handleSuccesfulFormSubmission
-        this.props.handleSuccesfulFormSubmission(response.data.portfolio_item);
+    axios({
+      method: this.state.apiAction,
+      url: this.state.apiUrl,
+      data: this.buildForm(),
+      withCredentials: true
+    }) 
+      // that is that gets returned when we have a succesful record created
+      // and we use it to pass it to handleSuccesfulFormSubmission with data received
+      .then(response => { 
+        if (this.state.editMode) {
+            this.props.handleEditFormSubmission();
+          } else {
+            this.props.handleNewFormSubmission(response.data.portfolio_item);
+          }
 //      to see response data replied->  console.log("response", response);
       // After Submit another thing to do is we have to reset to empty all items in form 
         this.setState ({
@@ -118,7 +180,11 @@ export default class PortfolioForm extends Component {
           url: "",
           thumb_image: "",
           banner_image: "",
-          logo: ""
+          logo: "",
+          editMode: false,
+          apiUrl: "https://jordan.devcamp.space/portfolio/portfolio_items",
+          apiAction: "post"
+
         });
         // Also reset the DropzoneComponents by Refs, deleting the file contained in each of them 
         // via function arrow with 3 arguments we wrapp in an array
@@ -158,7 +224,7 @@ export default class PortfolioForm extends Component {
         <div className="two-column">
           <input
             type="number"
-            min="0" max="999999999"
+            min="0" max="99999999999"
             name="position"
             placeholder="Position"
             value={this.state.position}
@@ -168,7 +234,7 @@ export default class PortfolioForm extends Component {
           <select
             className="select-element"
             name="category"
-            placeholder="Category"
+            value={this.state.category}
             onChange={this.handleChange}
           >
             <option value="eCommerce">eCommerce</option>
@@ -190,34 +256,67 @@ export default class PortfolioForm extends Component {
         </div>
 
         <div className="image-uploaders">
-          <DropzoneComponent
-            // These 2 methods have to be runned inmediately, Dropzone requirements,
-            // that's why in parents "()"
-            ref={this.thumbRef}
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleThumbDrop()}
-          >
-            <div className="dz-message">Thumbnail</div>
-          </DropzoneComponent>
+          {this.state.thumb_image_url && this.state.editMode ? (
+            <div className="portfolio-manager-image-wrapper">
+              <img src={this.state.thumb_image_url} />
+              <div className="image-removal-link">
+                <a onClick={() => this.deleteImage("thumb_image")}>
+                  Remove file
+                </a>
+              </div>
+            </div>
+          ) : (
+            <DropzoneComponent
+              // These 2 methods have to be runned inmediately, Dropzone requirements,
+              // that's why in parents "()"
+              ref={this.thumbRef}
+              config={this.componentConfig()}
+              djsConfig={this.djsConfig()}
+              eventHandlers={this.handleThumbDrop()}
+            >
+              <div className="dz-message">Thumbnail</div>
+            </DropzoneComponent>
+          )}
 
-          <DropzoneComponent
-            ref={this.bannerRef}
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleBannerDrop()}
-          >
-            <div className="dz-message">Banner</div>
-          </DropzoneComponent>
+          {this.state.banner_image_url && this.state.editMode ? (
+            <div className="portfolio-manager-image-wrapper">
+              <img src={this.state.banner_image_url} />
+              <div className="image-removal-link">
+                <a onClick={() => this.deleteImage("banner_image")}>
+                  Remove file
+                </a>
+              </div>
+            </div>
+          ) : (
+            <DropzoneComponent
+              ref={this.bannerRef}
+              config={this.componentConfig()}
+              djsConfig={this.djsConfig()}
+              eventHandlers={this.handleBannerDrop()}
+            >
+              <div className="dz-message">Banner</div>
+            </DropzoneComponent>
+          )}
 
-          <DropzoneComponent
-            ref={this.logoRef}
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleLogoDrop()}
-          >
-            <div className="dz-message">Logo</div>
-          </DropzoneComponent>
+          {this.state.logo_url && this.state.editMode ? (
+            <div className="portfolio-manager-image-wrapper">
+              <img src={this.state.logo_url} />
+              <div className="image-removal-link">
+                <a onClick={() => this.deleteImage("logo")}>
+                  Remove file
+                </a>
+              </div>
+            </div>
+          ) : (
+            <DropzoneComponent
+              ref={this.logoRef}
+              config={this.componentConfig()}
+              djsConfig={this.djsConfig()}
+              eventHandlers={this.handleLogoDrop()}
+            >
+              <div className="dz-message">Logo</div>
+            </DropzoneComponent>
+          )}
         </div>
 
         <div>
