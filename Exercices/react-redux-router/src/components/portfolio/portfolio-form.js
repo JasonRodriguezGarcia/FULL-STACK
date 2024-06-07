@@ -72,8 +72,8 @@ export default class PortfolioForm extends Component {
       this.props.clearPortfolioToEdit();
 
       this.setState({
-        id: id,             //null check in
-        name: name || "",   //case null = ""
+        id: id,             //null check in...
+        name: name || "",   //...case null = ""
         description: description || "",
         category: category || "eCommerce",
         position: position || "",
