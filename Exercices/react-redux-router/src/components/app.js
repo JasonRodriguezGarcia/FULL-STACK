@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 // import moment from "moment";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from "axios";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt, faEdit,
-      faSpinner, faPlusCircle } 
-      from "@fortawesome/free-solid-svg-icons";
-
 // import PortfolioContainer from './portfolio/portfolio-container';
 import NavigationContainer from './navigation/navigation-container';
 import Home from './pages/home';
@@ -19,14 +14,13 @@ import PortfolioManager from './pages/portfolio-manager';
 import PortfolioDetail from './portfolio/portfolio-detail';
 import Auth from './pages/auth';
 import NoMatch from './pages/no-match';
-
-library.add(faTrash, faSignOutAlt, faEdit,
-           faSpinner, faPlusCircle);
+import Icons from "../helpers/icons";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
+    Icons();
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN"
     }
@@ -155,18 +149,20 @@ export default class App extends Component {
     // Es la forma correcta de pasar un props a un componente que tienes dentro de un Route, por lo 
     // tanto como es una librería externa, consultando su documentación esta nos indica que es la forma
     // de pasar un props!! // Auth component can update these metods */}
-              <Route 
-                  path="/auth" render={props => ( <Auth {...props}  handleSuccessfulLogin = {this.handleSuccessfulLogin}
-                                                                    handleUnsuccessfulLogin = {this.handleUnsuccessfulLogin} /> )}
+              <Route path="/auth" render={props => (
+                <Auth {...props}  handleSuccessfulLogin = {this.handleSuccessfulLogin}
+                                handleUnsuccessfulLogin = {this.handleUnsuccessfulLogin} /> )}
               />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route path="/blog" component={Blog} />
-              {/* The slug "prop" is passed to BlogDetail but it isn't
+              // BE CARE ARROW FUNCTIION WITH () DUE TO NO RETURNED ANYTHING !!
+              <Route path="/blog" render={props => (
+                <Blog {...props} loggedInStatus = {this.state.loggedInStatus} /> )}
+              />
+                            {/* The slug "prop" is passed to BlogDetail but it isn't
               explicity specified */}
               <Route path="/b/:slug" component={BlogDetail} />
 
-              {/* <Route path="/blog" component={Blog} /> */}
               {this.state.loggedInStatus === "LOGGED_IN" ? (
                 this.authorizedPages()
                 ) : null}
