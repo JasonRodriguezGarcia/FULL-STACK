@@ -151,16 +151,24 @@ render() {
         <div className="two-column">
           <input 
             type="text" 
-            onChange={this.handleChange}
             name="title" // for handleChange
             placeholder="Blog title"
-            value={this.state.title} />
-          <input 
+            value={this.state.title}
+            onChange={this.handleChange} />
+            {/* <input 
             type="text" 
             onChange={this.handleChange}
             name="blog_status" // for handleChange
             placeholder="Blog status"
-            value={this.state.blog_status} />
+            value={this.state.blog_status} />  */}
+          <select 
+            name="blog_status" // for handleChange
+            value={this.state.blog_status}
+            onChange={this.handleChange}
+          >
+            <option value="draft">draft</option>
+            <option value="published">published</option>
+          </select>
         </div>
 
         <div className='one-column'>

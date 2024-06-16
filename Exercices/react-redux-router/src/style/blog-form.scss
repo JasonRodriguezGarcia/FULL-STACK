@@ -7,6 +7,9 @@
   input {
     margin-bottom: 0px;
   }
+  select {
+    width: 10vw;
+  }
 // overriding image-uploaders
   .image-uploaders {
     @include base-grid();
