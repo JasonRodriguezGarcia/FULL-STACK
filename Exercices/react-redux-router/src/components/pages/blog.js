@@ -24,6 +24,28 @@ class Blog extends Component {
     this.handleModalClose = this.handleModalClose.bind(this);
     this.handleSuccessfulNewBlogSubmission = 
       this.handleSuccessfulNewBlogSubmission.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+  }
+
+  handleDeleteClick(blog) {
+  //  console.log("deleted ", blog);
+  axios
+    .delete(
+      `https://api.devcamp.space/portfolio/portfolio_blogs/${blog.id}`,
+      { withCredentials: true }
+    )
+    .then(response => {
+      this.setState({ // we filter for the ones not equal
+        blogItems: this.state.blogItems.filter(blogItem => {
+          return blog.id !== blogItem.id;
+        })
+      });
+      // to return something:
+      return response.data;
+    })
+    .catch(error => {
+      console.log("delete blog error", error);
+    });
   }
 
   handleSuccessfulNewBlogSubmission(blog) {
@@ -31,8 +53,8 @@ class Blog extends Component {
       blogModalIsOpen: false,
       blogItems: [blog].concat(this.state.blogItems)
     });
-
   }
+
   handleModalClose() {
     this.setState ({
       blogModalIsOpen: false
@@ -89,7 +111,20 @@ class Blog extends Component {
 
   render() {
     const blogRecords = this.state.blogItems.map(blogItem=> {
-      return <BlogItem key={blogItem.key} blogItem={blogItem} />
+      if (this.props.loggedInStatus === "LOGGED_IN"){
+        return ( // key have to be in the outermost wrapper
+          <div key={blogItem.key} className="admin-blog-wrapper">
+            <BlogItem blogItem={blogItem} />
+     {/* handleDeleteClick need to pass an argument, but if we pass
+     the argument it has to be in () and that tells to JSX to 
+     EXECUTE AUTOMATICALLY the funtion when the page is rendered
+     To allow using a function, an anonymous arrow function is used*/}
+            <a onClick={() => this.handleDeleteClick(blogItem)}>Delete</a>
+          </div>
+        )
+      } else {
+        return <BlogItem key={blogItem.key} blogItem={blogItem} />
+      }
     });
     return ( // using same className styles used in blog-detail
       // and this will affec to to blogRecords Links indirectly

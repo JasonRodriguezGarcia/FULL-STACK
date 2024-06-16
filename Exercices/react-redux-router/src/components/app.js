@@ -150,19 +150,22 @@ export default class App extends Component {
     // tanto como es una librería externa, consultando su documentación esta nos indica que es la forma
     // de pasar un props!! // Auth component can update these metods */}
               <Route path="/auth" render={props => (
-                <Auth {...props}  handleSuccessfulLogin = {this.handleSuccessfulLogin}
-                                handleUnsuccessfulLogin = {this.handleUnsuccessfulLogin} /> )}
+                <Auth {...props}  handleSuccessfulLogin={this.handleSuccessfulLogin}
+                                handleUnsuccessfulLogin={this.handleUnsuccessfulLogin} /> )}
               />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-              // BE CARE ARROW FUNCTIION WITH () DUE TO NO RETURNED ANYTHING !!
+               {/* BE CARE ARROW FUNCTION WITH () DUE TO NO RETURNED ANYTHING !! */}
               <Route path="/blog" render={props => (
-                <Blog {...props} loggedInStatus = {this.state.loggedInStatus} /> )}
+                <Blog {...props} loggedInStatus={this.state.loggedInStatus} /> )}
               />
-                            {/* The slug "prop" is passed to BlogDetail but it isn't
-              explicity specified */}
-              <Route path="/b/:slug" component={BlogDetail} />
-
+              {/* The slug "prop" is passed to BlogDetail but it isn't
+              explicity specified as prop*/}
+              <Route path="/b/:slug"
+                render={props => (
+                 <BlogDetail {...props} loggedInStatus={this.state.loggedInStatus} />
+                )}
+              />
               {this.state.loggedInStatus === "LOGGED_IN" ? (
                 this.authorizedPages()
                 ) : null}

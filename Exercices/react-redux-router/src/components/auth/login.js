@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class login extends Component {
   constructor (props){
@@ -66,32 +67,28 @@ export default class login extends Component {
       <div>
         <h1>LOGIN TO ACCESS YOUR DASHBOARD</h1>
         <div>{this.state.errorText}</div>
-        {/* <h2>{this.state.userEmail}</h2>
-        <h2>{this.state.userPassword}</h2> */}
-
-        {/* If we were in JS, the event onSubmit runs handleSumit(formsubmitevent) but we are in REACT!! */}
-        <form onSubmit={this.handleSubmit}>
-          {/* WARNING !!! In onChange, handleChange metod WITHOUT PARENTS ()
-          TO AVOID TO BE EJECUTED WHEN OPEN */}
-          <input 
-            type="email"
-            name="userEmail"
-            placeholder="Your email"
-            value={this.state.email}
-            onChange={this.handleChange} // Everytime userEmail is changing, handleChange is called
-          />
-
-          <input 
-            type="password"
-            name="userPassword"
-            placeholder="Your password"
-            value={this.state.password}
-            onChange={this.handleChange} // Everytime userEmail is changing, handleChange is called
-          />
-
-          <div> {/* submit = Whenever we press on this button it automatically SUBMIT the form */}
-            <button type="submit">Login</button>
+        <form onSubmit={this.handleSubmit} className='auth-form-wrapper'>
+          <div className='form-group'>
+            <FontAwesomeIcon icon="envelope" />
+            <input 
+              type="email"
+              name="userEmail"
+              placeholder="Your email"
+              value={this.state.email}
+              onChange={this.handleChange} // Everytime userEmail is changing, handleChange is called
+            />
           </div>
+          <div className='form-group'>
+            <FontAwesomeIcon icon="lock" />
+            <input 
+              type="password"
+              name="userPassword"
+              placeholder="Your password"
+              value={this.state.password}
+              onChange={this.handleChange} // Everytime userEmail is changing, handleChange is called
+            />
+          </div>
+          <button className="btn" type="submit">Login</button>
         </form>
       </div>
      );

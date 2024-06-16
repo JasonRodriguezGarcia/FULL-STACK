@@ -20,25 +20,34 @@ export default class PortfolioContainer extends Component {
       data: []
     };
     
-    this.handleFiltr0 = this.handleFilter.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
 
   }
   
   handleFilter(filter) {
-    this.setState({
-      data: this.state.data.filter(item => {
-        return item.category === filter;
-      })
-    });
+    if (filter==="CLEAR_FILTERS"){
+      this.getPortfolioItems();
+    } else {
+      this.getPortfolioItems(filter);
+    }
   }
 
-  getPortfolioItems() {
+  getPortfolioItems(filter = null) {
     axios
       .get("https://jasonrodriguez.devcamp.space/portfolio/portfolio_items")
       .then(response => {
-        this.setState({
-          data: response.data.portfolio_items // This portfolio_items is the one from the replied data
-        });
+        if (filter) {
+          this.setState({
+            data: response.data.portfolio_items.filter(item =>{
+              return item.category === filter;
+            })
+          });
+
+        } else {
+          this.setState({
+            data: response.data.portfolio_items 
+          });
+        }
       })
       .catch(error => {
         console.log("error producido:", error);
@@ -68,28 +77,30 @@ export default class PortfolioContainer extends Component {
     }
 //    this.getPortfolioItems(); <<-- now componentDidMount() is used
     return (
-        <div className='portfolio-items-wrapper'>
-          <button className="btn" onClick={() => this.handleFiltr0("eCommerce")}>
-            eCommerce
+      <div className='homepage-wrapper'>
+        <div className='filter-links'>
+          <button className="btn" onClick={() => this.handleFilter("eCommerce")}>
+           eCommerce
           </button>
-          <button className="btn" onClick={() => this.handleFiltr0("Scheduling")}>
+          <button className="btn" onClick={() => this.handleFilter("Scheduling")}>
             Scheduling
           </button>
-          <button className="btn" onClick={() => this.handleFiltr0("Enterprise")}>
+          <button className="btn" onClick={() => this.handleFilter("Enterprise")}>
             Enterprise
           </button>
-          
+          <button className="btn" onClick={() => this.handleFilter("CLEAR_FILTERS")}>
+            All
+          </button>
+        </div>
+        <div className='portfolio-items-wrapper'>
           {this.portfolioItems()} 
         </div>
+      </div>
       /*<button onClick={this.handleFilter('eCommerce')}>eCommerce</button> Don't work
-        The reason why is it has to deal with how JavaScript manages functions that have parentheses.
-        Whenever you have this type of syntax what would happen is the page would load and then JavaScript
-        would immediately try to run this. So you'd get a bunch of errors, because you would get three
-        functions that are all trying to update the state automatically.
-        What we need to do is create what's called an anonymous function. We're just going to say I want
-        to store these parens, and then an arrow function, and now what this is going to do is it's not 
-        going to run automatically, it's going to be placed almost kinda in a holding pattern. The page is
-        gonna load and then the functions are going to be ready, but they're not going to be called automatically.
+        If we use 3 functions with parentheses, JSX will automatically try to run them, giving errors
+        What we need to do is create an anonymous functionto store these parens, and then an arrow function.
+        The page is gonna load and then the functions are going to be ready, but they're not going to be
+        called automatically.
       */
     );
   }
