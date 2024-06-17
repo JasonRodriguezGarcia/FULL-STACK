@@ -1,47 +1,86 @@
 import React, { Component } from "react";
 import { JournalEntry } from "./journal_entry";
 
-const rawJournalData = [
-  { title: "Post One", content: "Post content", status: "draft" },
-  { title: "Post Two", content: "More content", status: "published" },
-  { title: "Post Three", content: "More content", status: "published" },
-  { title: "Post Four", content: "More content", status: "published" }
-];
+// const rawJournalData = [
+//   { title: "Post One", content: "Post content1", status: "draft" },
+//   { title: "Post Two", content: "More content2", status: "published" },
+//   { title: "Post Three", content: "More content3", status: "published" },
+//   { title: "Post Four", content: "More content4", status: "published" }
+// ];
 
 export default class JournalList extends Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
-      journalData: rawJournalData,
       isOpen: true
     };
+
+
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.toggleStatus = this.toggleStatus.bind(this);
+    this.handleShowAllEntries = this.handleShowAllEntries.bind(this);
+    this.handleClearEntriesClick = this.handleClearEntriesClick.bind(this);
   }
 
-  clearEntries = () => {
-    this.setState({ journalData: [], isOpen: false });
-  };
+  handleDeleteClick(myTitle) {
+    // Create finding in element
+//    const positionElement = this.props.rawJournalData.findIndex((element) => element.title === myTitle);
+    // Deleting position
+    this.props.handleDelete(myTitle);
+//     this.setState ({
+//       rawJournalData: rawJournalData.splice(positionElement,1)
+//     })
+// //    this.props.rawJournalData.splice(positionElement,1); 
+//    console.log(positionElement);
+  }
 
-  showAllEntries = () => {
-    this.setState({ journalData: rawJournalData, isOpen: true });
-  };
+  handleClearEntriesClick() {
+    this.setState ({ 
+      isOpen: false
+    });
+    console.log(this.state.isOpen);
+    console.log("isOpen", this.state.isOpen);
+    this.props.handleClearEntries();
+    console.log("isOpen", this.state.isOpen);
+  }
 
-  toggleStatus = () => {
+  handleShowAllEntries() {
+    console.log(this.props.rawJournalData.length);
+      this.setState ({ isOpen: true });
+      this.toggleStatus();
+  }
+
+  toggleStatus() {
     if (this.state.isOpen) {
-      this.setState({ journalData: [], isOpen: false });
+      console.log("pasando por el SI");
+      console.log(this.state.isOpen); 
+      this.setState ({ isOpen: false });
+      this.props.handleToggleStatus(false);
     } else {
-      this.setState({ journalData: rawJournalData, isOpen: true });
+      console.log("pasando por el NO");
+      console.log(this.state.isOpen);
+      this.setState ({ isOpen: true });
+      this.props.handleToggleStatus(true);
     }
-  };
+ }
 
   render() {
-    const journalEntries = this.state.journalData.map(journalEntry => {
+    const journalEntries = this.props.rawJournalData.map(journalEntry => {
       return (
-        <div key={journalEntry.title}>
-          <JournalEntry
-            title={journalEntry.title}
-            content={journalEntry.content}
-          />
+        <div key={journalEntry.title} style={{
+            color:"red",
+            display: "grid",
+            gridTemplateColumns: "2fr 1fr 6fr"}}>
+          <div>
+            <JournalEntry
+                title={journalEntry.title}
+                content={journalEntry.content}
+            />
+          </div>
+          <div className="btn">
+             <button onClick={() => this.handleDeleteClick(journalEntry.title)}>Delete</button>
+          </div>
         </div>
       );
     });
@@ -49,8 +88,8 @@ export default class JournalList extends Component {
     return (
       <div>
         <h1>{this.props.heading}</h1>
-        <button onClick={this.clearEntries}>Clear Journal Entries</button>
-        <button onClick={this.showAllEntries}>Show All Journal Entries</button>
+        <button onClick={this.handleClearEntriesClick}>Clear Journal Entries</button>
+        <button onClick={this.handleShowAllEntries}>Show All Journal Entries</button>
         <button onClick={this.toggleStatus}>Toggle Status</button>
         {journalEntries}        
       </div>
