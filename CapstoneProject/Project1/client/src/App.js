@@ -19,7 +19,17 @@ export default function App() {
     <div>
       ESTO ES UN COMIENZO !!!
       <br/>CONECTADO BACK-END CON FRONT-END!!!
-      <br/>ya queda menos .... :_(
+      <br/>ya queda menos .... :_
+      {(typeof data.members === "undefined") 
+        ? (
+          <p>No hay datos...</p>
+        )
+        : (
+          data.members.map((member, i) => (
+            <p key={i}>{member}</p>
+          )
+        )
+      )}
     </div>
   )
 }
