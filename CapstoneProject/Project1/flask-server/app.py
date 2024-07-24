@@ -57,6 +57,16 @@ def get_results():
 # query = text("SELECT name, price FROM products WHERE category=:product_category")
 # result = db.engine.execute(query, product_category="Fruit")
 
+    # result = db.session.execute(text(request.get_json()['query']))
+    # result = db.session.execute(text("DROP TABLE IF EXISTS toDelete;"))
+    # result = db.session.execute(text(
+    #     "CREATE TABLE toDelete (\
+    #         id INTEGER PRIMARY KEY AUTOINCREMENT,\
+    #         title STRING(100) NOT NULL ,\
+    #         content STRING(100) NOT NULL);\
+    #     "))
+    # result = db.session.execute(text("SELECT * FROM toDelete WHERE id=3"))
+    # response = []
 
     # GET THE SQLALCHEMY RESULTPROXY OBJECT 
     result = db.session.execute(text(request.get_json()['query']))
@@ -69,8 +79,10 @@ def get_results():
 # #            response.update({f'Record {i}': list(each)}) 
 #             response.update({f'Record {i}': list(each)})
 #             i+= 1
+#        [test] = [result]
+#        print(list(test))
         for each in result: 
-#            response.update({f'Record {i}': list(each)}) 
+#            response.update({f'Record {i}': each}) 
             response.append(list(each))
             i+= 1
         print ("api post terminado ...")
