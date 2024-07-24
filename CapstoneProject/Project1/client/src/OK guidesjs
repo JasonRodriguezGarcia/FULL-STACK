@@ -102,7 +102,7 @@ export default class Guides extends Component {
             // return (<div key={guideItem.key}><h3>{guideItem.content} - {guideItem.title}</h3>
             // return (<div key={guideItem[0]}><h3>{guideItem[0]} {guideItem[1]} - {guideItem[2]}</h3>
             //     </div>)
-            return <GuideItem key={guideItem.id} guideItem={guideItem} />
+            return <GuideItem key={guideItem[0]} guideItem={guideItem} />
         });
     
         return (

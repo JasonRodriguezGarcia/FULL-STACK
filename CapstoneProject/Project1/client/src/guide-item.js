@@ -4,15 +4,15 @@ import React from 'react';
 // import Truncate from 'react-truncate';
 
 const GuideItem = props => {
-    const [
+    const {
         id,
         title,
         content,
-    ] = props.guideItem;
+     } = props.guideItem;
     return (
     <div>
         {/* <Link to={`/b/${id}`}> */}
-        <h1>{id} {title} {content}</h1>
+        <p>{id} {title} {content}</p>
         {/* </Link> */}
         {/* <div>
         <Truncate lines={5} // configuring

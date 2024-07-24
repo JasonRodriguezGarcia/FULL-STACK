@@ -8,7 +8,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-# Allowing access to Flask server to following ips
+# Allowing access to Flask server to following ips, second IP is example for many ip's list
 CORS(app, origins=["http://localhost:3000", "http://193.3.33.1:3550"])
 
 db_file = 'app.sqlite'
@@ -70,22 +70,22 @@ def get_results():
 
     # GET THE SQLALCHEMY RESULTPROXY OBJECT 
     result = db.session.execute(text(request.get_json()['query']))
-    response = []
+    response = [] #    response = {}
     if request.method == 'POST' or request.method == 'GET':
         i = 1
         # ITERATE OVER EACH RECORD IN RESULT AND ADD IT  
-        # IN A PYTHON DICT OBJECT 
-#         for each in result: 
-# #            response.update({f'Record {i}': list(each)}) 
-#             response.update({f'Record {i}': list(each)})
-#             i+= 1
-#        [test] = [result]
-#        print(list(test))
+        # IN A PYTHON LIST/DICT OBJECT 
         for each in result: 
 #            response.update({f'Record {i}': each}) 
-            response.append(list(each))
+            dataList = list(each)
+            response.append({
+                "id": dataList[0],
+                "title": dataList[1],
+                "content": dataList[2]
+                })
+#            print(response)
             i+= 1
-        print ("api post terminado ...")
+        print ("api get_results ended ...")
         
     db.session.commit()
     return response
