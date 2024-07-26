@@ -3,10 +3,10 @@
 
 import sqlite3
 #opening connection to database which will be created
-connection = sqlite3.connect('./databases/database.db')
+connection = sqlite3.connect('./xdatabases/database.db')
 
 #opening schema.sql
-with open('./schemas/schema.sql') as f:
+with open('./xschemas/schema.sql') as f:
 
 #Next you execute its contents using the executescript() method
 #that executes multiple SQL statements at once, which will create the posts table

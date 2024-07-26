@@ -52,22 +52,6 @@ def get_results():
 #  db.execute("UPDATE posts SET payment = %s WHERE unique_id = %s;", \
 #     (payment, unique_id,))  
 
-# from sqlalchemy import text
-
-# query = text("SELECT name, price FROM products WHERE category=:product_category")
-# result = db.engine.execute(query, product_category="Fruit")
-
-    # result = db.session.execute(text(request.get_json()['query']))
-    # result = db.session.execute(text("DROP TABLE IF EXISTS toDelete;"))
-    # result = db.session.execute(text(
-    #     "CREATE TABLE toDelete (\
-    #         id INTEGER PRIMARY KEY AUTOINCREMENT,\
-    #         title STRING(100) NOT NULL ,\
-    #         content STRING(100) NOT NULL);\
-    #     "))
-    # result = db.session.execute(text("SELECT * FROM toDelete WHERE id=3"))
-    # response = []
-
     # GET THE SQLALCHEMY RESULTPROXY OBJECT 
     result = db.session.execute(text(request.get_json()['query']))
     response = [] #    response = {}
