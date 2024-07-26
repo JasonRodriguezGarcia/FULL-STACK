@@ -1,7 +1,7 @@
 // import React, {useState, useEffect} from 'react'
 import React, { Component } from "react";
 import axios from "axios";
-import Guides from "./guides";
+import Workers from "./workers";
 
 export default class App extends Component {
     constructor() {
@@ -16,7 +16,7 @@ export default class App extends Component {
     render() {
         return (
             <div className='container'>
-                <Guides />
+                <Workers />
             </div>    
         )
     }
