@@ -8,11 +8,24 @@ const WorkerItem = props => {
         id,
         nombre,
         apellidos,
+        fecha_nacimiento,
+        doi,
+        id_municipio,
+        codigo_postal,
+        id_provincia,
+        id_vehiculo,
+        telefono_contacto,
+        correo_electronico,
+        id_situacion,
+        lopd
      } = props.workerItem;
+
     return (
     <div>
         {/* <Link to={`/b/${id}`}> */}
-        <p>{id} {nombre} {apellidos}</p>
+        <p>{id} {nombre} {apellidos} {fecha_nacimiento} {doi} {id_municipio} {codigo_postal} {id_provincia}
+            {id_vehiculo} {telefono_contacto} {correo_electronico} {id_situacion} {lopd}
+        </p>
         {/* </Link> */}
         {/* <div>
         <Truncate lines={5} // configuring

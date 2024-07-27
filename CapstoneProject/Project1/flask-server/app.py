@@ -70,7 +70,18 @@ def get_results():
             response.append({
                 "id": dataList[0],
                 "nombre": dataList[1],
-                "apellidos": dataList[2]
+                "apellidos": dataList[2],
+                "fecha_nacimiento": dataList[3],
+                "doi": dataList[4],
+                "id_municipio": dataList[5],
+                "codigo_postal": dataList[6],
+                "id_provincia": dataList[7],
+                "id_vehiculo": dataList[8],
+                "telefono_contacto": dataList[9],
+                "correo_electronico": dataList[10],
+                "id_situacion": dataList[11],
+                "lopd": dataList[12]
+  #"curriculum` blob, -- NOT NULL,
                 })
 #            print(response)
             i+= 1

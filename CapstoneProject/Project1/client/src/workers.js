@@ -30,34 +30,28 @@ export default class Workers extends Component {
       }
 
     handleResults() {  //WORKING OK retrieving data selection
-        // axios({
-        //     method: this.state.apiAction,
-        //     url: this.state.apiUrl,
-        //     // data: this.buildForm(),
-        //     data: this.buildForm(),
-        //     withCredentials: false
-        //     })
-        axios
-            .post("http://127.0.0.1:5000/get_results",
-                {
-                    // query: `select * from guide where id=1;`
-                    // query: `select * from guide where id=${id};`
-                    // query: `UPDATE guide SET title="My first guide CHANGED" WHERE id=${id};`
-
-                    query: `select * from trabajadores;`
-                },
-                { withCredentials: false}
-            )
-            .then(response => {
-                this.setState({
-                    workerItems: response.data 
-                });
-                console.log(response.data);
-                return console.log("Retrieveing data OK");
-            })
-            .catch(error => {
-                return console.log("retrieving data error");
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            // data: this.buildForm(),
+            data:                 {
+                // query: `select * from guide where id=1;`
+                // query: `select * from guide where id=${id};`
+                // query: `UPDATE guide SET title="My first guide CHANGED" WHERE id=${id};`
+                query: `select * from trabajadores;`
+            },
+            withCredentials: false
+        })
+        .then(response => {
+            this.setState({
+                workerItems: response.data 
             });
+            console.log(response.data);
+            return console.log("Retrieveing data OK");
+        })
+        .catch(error => {
+            return console.log("retrieving data error");
+        });
     }
 
     // handleResults2() { // Trying updating data OK
@@ -99,16 +93,12 @@ export default class Workers extends Component {
       
     render() {
         const dataRecords = this.state.workerItems.map(workerItem => {
-            // return (<div key={guideItem.key}><h3>{guideItem.content} - {guideItem.title}</h3>
-            // return (<div key={guideItem[0]}><h3>{guideItem[0]} {guideItem[1]} - {guideItem[2]}</h3>
-            //     </div>)
-            // return <GuideItem key={guideItem.id} guideItem={guideItem} />
             return <WorkerItem key={workerItem.id} workerItem={workerItem} />
         });
     
         return (
             <div className='container'>
-                <p>RULANDO ...</p>
+                <p>RULANDO otra vez final..</p>
                 {dataRecords}
             </div>    
         )
