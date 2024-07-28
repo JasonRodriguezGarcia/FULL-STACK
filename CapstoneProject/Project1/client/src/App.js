@@ -1,24 +1,44 @@
 // import React, {useState, useEffect} from 'react'
 import React, { Component } from "react";
-import axios from "axios";
-import Workers from "./workers";
+import './App.css';
+import './bootstrap-min.css';
+import CreateWorker from "./crud/workers/create-worker";
+
+
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
+import Workers from "./crud/workers/workers";
 
 export default class App extends Component {
     constructor() {
       super();
   
-      this.state = {
-        blogItems: [],
-        totalCount: 0,
-        isLoading: true,
-      };
+    //   this.state = {
+    //     blogItems: [],
+    //     totalCount: 0,
+    //     isLoading: true,
+    //   };
     }
     render() {
         return (
-            <div className='container'>
-                <Workers />
-            </div>    
+        //     <div className='container'>
+        //         <Workers />
+        //     </div>
+        <div className="vh-100 gradient-custom">
+            <div className="container">
+            <h1 className="page-header text-center">Workers CRUD</h1>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Workers />} />
+                    <Route path="/addnewuser" element={<CreateWorker />} />
+                    {/* <Route path="user/:id/edit" element={<EditUser />} /> */}
+                </Routes>
+            </BrowserRouter>
+            </div>
+        </div>
+    
         )
+    
     }
 }
 

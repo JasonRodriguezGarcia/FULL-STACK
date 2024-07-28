@@ -11,7 +11,6 @@ app = Flask(__name__)
 # Allowing access to Flask server to following ips, second IP is example for many ip's list
 CORS(app, origins=["http://localhost:3000", "http://193.3.33.1:3550"])
 
-#db_file = 'app.sqlite'
 db_file = './databases/database.db'
 # base application directory, where to save our sql table, where to place our sqlite database 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -63,10 +62,6 @@ def get_results():
         for each in result: 
 #            response.update({f'Record {i}': each}) 
             dataList = list(each)
-            # response.append({
-            #     "id": dataList[0],
-            #     "title": dataList[1],
-            #     "content": dataList[2]
             response.append({
                 "id": dataList[0],
                 "nombre": dataList[1],
