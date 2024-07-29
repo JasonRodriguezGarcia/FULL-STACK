@@ -1,13 +1,10 @@
 // import React, {useState, useEffect} from 'react'
 import React, { Component } from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 import './bootstrap-min.css';
-import CreateWorker from "./crud/workers/create-worker";
-
-
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
-import Workers from "./crud/workers/workers";
+import CreateWorker from "./pages/workers/create-workers";
+import Workers from "./pages/workers/workers";
 
 export default class App extends Component {
     constructor() {

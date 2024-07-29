@@ -32,8 +32,9 @@ const WorkerItem = props => {
     // <div>
         <tr key={id}>
             <td>{id}</td>
-            <td>{nombre}</td>
-            <td>{apellidos}</td>
+            <td>{nombre} {apellidos}</td>
+            {/* <td>{nombre}</td>
+            <td>{apellidos}</td> */}
             <td>{fecha_nacimiento}</td>
             <td>{doi}</td>
             <td>{id_municipio}</td>
