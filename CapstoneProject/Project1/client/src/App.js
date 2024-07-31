@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 import './bootstrap-min.css';
-import CreateWorker from "./pages/workers/create-workers";
-import Workers from "./pages/workers/workers";
+import ListWorkers from "./pages/workers/list-workers";
+import CreateWorker from "./pages/workers/create-worker";
+import EditWorker from "./pages/workers/edit-worker";
 
 export default class App extends Component {
     constructor() {
@@ -26,9 +27,9 @@ export default class App extends Component {
             <h1 className="page-header text-center">Workers CRUD</h1>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Workers />} />
-                    <Route path="/addnewuser" element={<CreateWorker />} />
-                    {/* <Route path="user/:id/edit" element={<EditUser />} /> */}
+                    <Route path="/" element={<ListWorkers />} />
+                    <Route path="/addnewworker" element={<CreateWorker />} />
+                    <Route path="user/:id/edit" element={<EditWorker />} />
                 </Routes>
             </BrowserRouter>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import axios from 'axios';
+// import { Link } from "react-router-dom";
 // import striptags from 'striptags';
 // import Truncate from 'react-truncate';
 
@@ -21,13 +22,18 @@ const WorkerItem = props => {
      } = props.workerItem;
 
     const deleteUser = (id) => {
-        // axios.delete(`http://127.0.0.1:5000/userdelete/${id}`).then(function(response){
-        //     console.log(response.data);
+        axios
+            .delete(`http://127.0.0.1:5000/workerdelete/${id}`)
+            .then(response => {
+                console.log(response.data);
         //     getUsers();
-        // });
-        alert(`Usuario ${id} borrado`);
-        return
+                alert(`Usuario - ${id} borrado`);
+            })
+            .error(error => {
+                console.log("Error Deleting");
+            });
     }
+
     return (
         <tr key={id}>
             <td>{id}</td>
