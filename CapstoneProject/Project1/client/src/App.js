@@ -5,7 +5,7 @@ import './App.css';
 import './bootstrap-min.css';
 import ListWorkers from "./pages/workers/list-workers";
 import CreateWorker from "./pages/workers/create-worker";
-import EditWorker from "./pages/workers/edit-worker";
+import EditWorker from "./pages/workers/xedit-worker";
 
 export default class App extends Component {
     constructor() {
@@ -23,13 +23,13 @@ export default class App extends Component {
     handleListUpdatedTrue() {
         this.setState ({
             workerListUpdated : "true"
-        })
+        });
     }
 
     handleListUpdatedFalse() {
         this.setState ({
             workerListUpdated : "false"
-        })
+        });
     }
 
     render() {
@@ -39,7 +39,6 @@ export default class App extends Component {
         //     </div>
         <div className="vh-100 gradient-custom">
             <div className="container">
-                <h2> {this.state.workerListUpdated}</h2>
             <h1 className="page-header text-center">Workers CRUD {this.state.workerListUpdated}</h1>
             <BrowserRouter>
                 <Routes>

@@ -5,8 +5,8 @@ import axios from "axios";
 import WorkerItem from "./worker-item";
 
 export default class ListWorkers extends Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
   
       this.state = {
         workerItems: [],
@@ -51,7 +51,7 @@ handleListWorkers() {  //WORKING OK retrieving data selection
         this.setState({
             workerItems: response.data 
         });
-        console.log(response.data)
+        console.log(response.data);
         console.log("Retrieving data Ok");
         // return console.log("Retrieveing data OK");
     })
@@ -61,23 +61,18 @@ handleListWorkers() {  //WORKING OK retrieving data selection
     });
 }
 
- componentDidUpdate() {
-    if (this.props.workerListUpdated === "true") {
+componentDidUpdate() {
+    // if (this.props.workerListUpdated === "true") {
         this.handleListWorkers();
-        // this.props.workerListUpdated = false;
-        this.props.handleListUpdatedFalse();
-    }
+        // this.props.handleListUpdatedFalse();
+    // }
 }
 
 componentDidMount(){
     this.handleListWorkers();
-
 }
 
-handleDeleteClick(blog) {
-    //  console.log("deleted ", blog);
-    }
-    
+   
 render() {
     const dataRecords = this.state.workerItems.map(workerItem => {
         return <WorkerItem key={workerItem.id} 

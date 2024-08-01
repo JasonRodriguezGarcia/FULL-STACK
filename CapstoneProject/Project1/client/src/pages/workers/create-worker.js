@@ -69,17 +69,16 @@ class CreateWorker extends Component {
             this.setState({
                 newId: response.data
             });
-            console.log(response.data);
+            // console.log(response.data);
             console.log("Data created OK");
         })
         .catch(error => {
             console.log("Data creation error");
         });
-        event.preventDefault();
-        const { navigate } = this.props;
-        // this.props.workerListUpdated = true;
-        navigate("/");
+        debugger;   
         this.props.handleListUpdatedTrue();
+        const { navigate } = this.props;
+        navigate("/");
     }
 
     render() {
