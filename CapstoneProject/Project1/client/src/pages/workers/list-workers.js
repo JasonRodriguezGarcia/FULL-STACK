@@ -12,60 +12,75 @@ export default class ListWorkers extends Component {
         workerItems: [],
         totalCount: 0,
         isLoading: true,
-        apiUrl: "http://127.0.0.1:5000/get_results",
+        apiUrl: "http://127.0.0.1:5000/get_listworkers",
         apiAction: "POST",
+        deletedId: 0
       };
 
-      this.handleResults = this.handleResults.bind(this);
+      this.handleListWorkers = this.handleListWorkers.bind(this);
+      this.handleUpdateListWorkers = this.handleUpdateListWorkers.bind(this);
     }
 
-    buildForm() {
-        let formData = new FormData();
-        
-        formData.append("[query]", "select * from trabajadores;");
-
-        return formData;  
-    }
-
-    handleResults() {  //WORKING OK retrieving data selection
-        axios({
-            method: this.state.apiAction,
-            url: this.state.apiUrl,
-            data: {
-                // query: `select * from guide where id=1;`
-                // query: `select * from guide where id=${id};`
-                // query: `UPDATE guide SET title="My first guide CHANGED" WHERE id=${id};`
-                query: `select * from trabajadores;`
-            },
-            withCredentials: false
+handleUpdateListWorkers(id) {
+    this.setState({
+        workerItems: this.state.workerItems.filter(item => {
+          return item.id !== id;
         })
-        .then(response => {
-            this.setState({
-                workerItems: response.data 
-            });
-            console.log(response.data)
-            console.log("Retrieving data Ok");
-            // console.log(response.data);
-            // return console.log("Retrieveing data OK");
-        })
-        .catch(error => {
-            console.log("retrieving data error");
-            // return console.log("retrieving data error");
-        });
-    }
+      });
 
-    componentDidMount(){
-        this.handleResults();
-    }
+    // this.setState({
+    //     portfolioItems: this.state.portfolioItems.filter(item => {
+    //       return item.id !== portfolioItem.id;
+    //     })
+    //   });
 
-    handleDeleteClick(blog) {
-        //  console.log("deleted ", blog);
-        }
-        
-    render() {
-        const dataRecords = this.state.workerItems.map(workerItem => {
-            return <WorkerItem key={workerItem.id} workerItem={workerItem} />
+}
+
+buildForm() {
+    let formData = new FormData();
+    formData.append("[query]", "select * from trabajadores;");
+    return formData;  
+}
+
+handleListWorkers() {  //WORKING OK retrieving data selection
+    axios({
+        method: this.state.apiAction,
+        url: this.state.apiUrl,
+        data: {
+            // query: `select * from guide where id=1;`
+            // query: `select * from guide where id=${id};`
+            // query: `UPDATE guide SET title="My first guide CHANGED" WHERE id=${id};`
+            query: `select * from trabajadores;`
+        },
+        withCredentials: false
+    })
+    .then(response => {
+        this.setState({
+            workerItems: response.data 
         });
+        console.log(response.data)
+        console.log("Retrieving data Ok");
+        // return console.log("Retrieveing data OK");
+    })
+    .catch(error => {
+        console.log("retrieving data error");
+        // return console.log("retrieving data error");
+    });
+}
+
+componentDidMount(){
+    this.handleListWorkers();
+}
+
+handleDeleteClick(blog) {
+    //  console.log("deleted ", blog);
+    }
+    
+render() {
+    const dataRecords = this.state.workerItems.map(workerItem => {
+        return <WorkerItem key={workerItem.id} 
+                workerItem={workerItem} handleUpdateListWorkers = {this.handleUpdateListWorkers} />
+    });
 
         return (
             <div>

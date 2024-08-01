@@ -32,7 +32,7 @@ const WorkerItem = props => {
             .then(response => {
                 console.log(response.data);
                 // alert(`Usuario - ${id} borrado`);
-                props.handleUpdateListWorkers(id);
+                props.deletedId = id;
 
             })
             .catch(error => {
@@ -42,8 +42,7 @@ const WorkerItem = props => {
         //     console.log(response.data);
         //     getUsers();
         // });
-
-        // props.handleListWorkers();
+        props.handleListWorkers();
         return
     }
 

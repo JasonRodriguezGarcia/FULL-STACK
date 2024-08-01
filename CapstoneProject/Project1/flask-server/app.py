@@ -49,16 +49,22 @@ guides_schema = GuideSchema(many=True)
 
 @app.route('/workerdelete/<id>',methods=['DELETE'])
 def userdelete(id):
-    user = Users.query.get(id)
-    db.session.delete(user)
+    # user = Users.query.get(id)
+    # db.session.delete(user)
+    # db.session.commit()
+    # return user_schema.jsonify(user)
+    result = db.session.execute(text(f'DELETE FROM trabajadores WHERE trabajadores_id_trabajador = {id};'))
     db.session.commit()
-    return user_schema.jsonify(user)
-
+    response = []
+    response.append ({
+        "id deleted": id
+    })
+    return response
 
 # Route to CREATE one worker in the database
 @app.route('/addnewworker', methods=["POST", "PUT", "PATCH", "GET"]) 
 def get_addnewworker(): 
-    nombre = request.form.get("trabajadores[trabajadores_nombre]")
+    # nombre = request.form.get("trabajadores[trabajadores_nombre]")
     parameters = (
         {"nombre" : request.form.get("trabajadores[trabajadores_nombre]"),
         "apellidos" : request.form.get("trabajadores[trabajadores_apellidos]"),
@@ -106,7 +112,7 @@ def get_addnewworker():
 #    return jsonify("Data saved OK")
 
 # Route to SELECT all data from the database and display in a table      
-@app.route('/get_results', methods=["POST", "PUT", "PATCH", "GET"]) 
+@app.route('/get_listworkers', methods=["POST", "PUT", "PATCH", "GET"]) 
 def get_results(): 
 
     # GET THE SQLALCHEMY RESULTPROXY OBJECT 

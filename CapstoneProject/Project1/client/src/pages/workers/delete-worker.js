@@ -22,11 +22,13 @@ const WorkerItem = props => {
      } = props.workerItem;
 
     const deleteUser = (id) => {
-        axios
-            .delete(`http://127.0.0.1:5000/workerdelete/${id}`)
+        axios({
+            method: 'DELETE',
+            url: `http://127.0.0.1:5000/workerdelete/${id}`
+        })
+            // .delete(`http://127.0.0.1:5000/workerdelete/${id}`)
             .then(response => {
                 console.log(response.data);
-        //     getUsers();
                 alert(`Usuario - ${id} borrado`);
             })
             .error(error => {
