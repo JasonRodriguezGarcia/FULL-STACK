@@ -42,16 +42,14 @@ export default class App extends Component {
             <h1 className="page-header text-center">Workers CRUD {this.state.workerListUpdated}</h1>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<ListWorkers handleListUpdatedTrue={this.handleListUpdatedTrue}
-                            handleListUpdatedFalse={this.handleListUpdatedFalse} workerListUpdated={this.state.workerListUpdated}
+                    <Route path="/" element={<ListWorkers 
                     />} />
 
                     {/* <Route path="/" render={props => (
                         <ListWorkers {...props} handleListUpdatedTrue={this.handleListUpdatedTrue}
                             handleListUpdatedFalse={this.handleListUpdatedFalse} workerListUpdated={this.state.workerListUpdated} /> )}
                     /> */}
-                    <Route path="/addnewworker" element={<CreateWorker handleListUpdatedTrue={this.handleListUpdatedTrue}
-                            handleListUpdatedFalse={this.handleListUpdatedFalse}  workerListUpdated={this.state.workerListUpdated}
+                    <Route path="/addnewworker" element={<CreateWorker
                     />} />
 
                     {/* <Route path="/addnewworker" render={props => (

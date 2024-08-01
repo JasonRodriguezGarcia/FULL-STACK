@@ -32,12 +32,10 @@ class CreateWorker extends Component {
         });
     }
 
-
     componentWillUnmount() {
         console.log(this.state.newId);
         // TODO
         //  - SEND EMAIL using this.state.newId
-        //  - CLOSE COMPONENT
     }
 
     buildForm() {
@@ -75,8 +73,6 @@ class CreateWorker extends Component {
         .catch(error => {
             console.log("Data creation error");
         });
-        debugger;   
-        this.props.handleListUpdatedTrue();
         const { navigate } = this.props;
         navigate("/");
     }

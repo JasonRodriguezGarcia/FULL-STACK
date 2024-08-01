@@ -62,10 +62,7 @@ handleListWorkers() {  //WORKING OK retrieving data selection
 }
 
 componentDidUpdate() {
-    // if (this.props.workerListUpdated === "true") {
-        this.handleListWorkers();
-        // this.props.handleListUpdatedFalse();
-    // }
+    this.handleListWorkers();
 }
 
 componentDidMount(){
