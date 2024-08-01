@@ -2,12 +2,13 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import withRouter from '../../hooks/withRouter';
  
-
-export default class CreateWorker extends Component {
-    constructor() {
-        super();
+// BE CARE OF END LINE CLASS CREATEWORKER COMPONENT
+// TUNNED withRouter
+class CreateWorker extends Component {
+    constructor(props) {
+        super(props);
  
         this.state = {
             apiUrl: "http://127.0.0.1:5000/addnewworker",
@@ -57,6 +58,7 @@ export default class CreateWorker extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         axios({
             method: this.state.apiAction,
             url: this.state.apiUrl,
@@ -67,17 +69,17 @@ export default class CreateWorker extends Component {
             this.setState({
                 newId: response.data
             });
-            // const test = response.data;
             console.log(response.data);
             console.log("Data created OK");
         })
         .catch(error => {
             console.log("Data creation error");
-            // return console.log("retrieving data error");
         });
         event.preventDefault();
-
-        // this.props.history.push('/');
+        const { navigate } = this.props;
+        // this.props.workerListUpdated = true;
+        navigate("/");
+        this.props.handleListUpdatedTrue();
     }
 
     render() {
@@ -132,3 +134,4 @@ export default class CreateWorker extends Component {
         );
     }
 }
+export default withRouter(CreateWorker);

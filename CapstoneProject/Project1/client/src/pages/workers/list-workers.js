@@ -14,7 +14,6 @@ export default class ListWorkers extends Component {
         isLoading: true,
         apiUrl: "http://127.0.0.1:5000/get_listworkers",
         apiAction: "POST",
-        deletedId: 0
       };
 
       this.handleListWorkers = this.handleListWorkers.bind(this);
@@ -27,12 +26,6 @@ handleUpdateListWorkers(id) {
           return item.id !== id;
         })
       });
-
-    // this.setState({
-    //     portfolioItems: this.state.portfolioItems.filter(item => {
-    //       return item.id !== portfolioItem.id;
-    //     })
-    //   });
 
 }
 
@@ -68,8 +61,17 @@ handleListWorkers() {  //WORKING OK retrieving data selection
     });
 }
 
+ componentDidUpdate() {
+    if (this.props.workerListUpdated === "true") {
+        this.handleListWorkers();
+        // this.props.workerListUpdated = false;
+        this.props.handleListUpdatedFalse();
+    }
+}
+
 componentDidMount(){
     this.handleListWorkers();
+
 }
 
 handleDeleteClick(blog) {

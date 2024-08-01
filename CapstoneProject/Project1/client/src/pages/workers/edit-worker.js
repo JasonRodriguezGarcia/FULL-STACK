@@ -1,4 +1,3 @@
-// import React, {useState, useEffect} from 'react'
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
@@ -72,11 +71,8 @@ export default class EditWorker extends Component {
         })
         .catch(error => {
             console.log("Data creation error");
-            // return console.log("retrieving data error");
         });
         event.preventDefault();
-
-        // this.props.history.push('/');
     }
 
     render() {
