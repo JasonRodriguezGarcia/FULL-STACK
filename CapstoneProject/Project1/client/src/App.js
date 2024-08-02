@@ -5,7 +5,7 @@ import './App.css';
 import './bootstrap-min.css';
 import ListWorkers from "./pages/workers/list-workers";
 import CreateWorker from "./pages/workers/create-worker";
-import EditWorker from "./pages/workers/xedit-worker";
+import EditWorker from "./pages/workers/edit-worker";
 
 export default class App extends Component {
     constructor() {
@@ -51,7 +51,7 @@ export default class App extends Component {
                     /> */}
                     <Route path="/addnewworker" element={<CreateWorker
                     />} />
-
+                        {/* THIS IS IN ROUTE V4 */}
                     {/* <Route path="/addnewworker" render={props => (
                         <CreateWorker {...props} handleListUpdatedTrue={this.handleListUpdatedTrue}
                             handleListUpdatedFalse={this.handleListUpdatedFalse} workerListUpdated={this.state.workerListUpdated} />)}

@@ -1,12 +1,14 @@
+// import React, {useState, useEffect} from 'react'
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import withRouter from '../../hooks/withRouter';
  
-
-export default class EditWorker extends Component {
-    constructor() {
-        super();
+// BE CARE OF END LINE CLASS CREATEWORKER COMPONENT
+// TUNNED withRouter
+class CreateWorker extends Component {
+    constructor(props) {
+        super(props);
  
         this.state = {
             apiUrl: "http://127.0.0.1:5000/addnewworker",
@@ -30,13 +32,12 @@ export default class EditWorker extends Component {
         });
     }
 
-
     componentWillUnmount() {
         console.log(this.state.newId);
         // TODO
-        //  - SEND EMAIL
-        //  - CLOSE COMPONENT
+        //  - SEND EMAIL using this.state.newId
     }
+
     buildForm() {
         let formData = new FormData();
         formData.append("trabajadores[trabajadores_nombre]", this.state.nombre);
@@ -55,6 +56,7 @@ export default class EditWorker extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         axios({
             method: this.state.apiAction,
             url: this.state.apiUrl,
@@ -64,15 +66,15 @@ export default class EditWorker extends Component {
         .then(response => {
             this.setState({
                 newId: response.data
-            })
-            // const test = response.data;
-            console.log(response.data);
+            });
+            // console.log(response.data);
             console.log("Data created OK");
         })
         .catch(error => {
             console.log("Data creation error");
         });
-        event.preventDefault();
+        const { navigate } = this.props;
+        navigate("/");
     }
 
     render() {
@@ -127,3 +129,4 @@ export default class EditWorker extends Component {
         );
     }
 }
+export default withRouter(CreateWorker);
