@@ -11,26 +11,13 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            workerListUpdated: "false",
+            workerListUpdated: false
         // blogItems: [],
         // totalCount: 0,
     //     isLoading: true,
         };
-        this.handleListUpdatedTrue = this.handleListUpdatedTrue.bind(this);
-        this.handleListUpdatedFalse = this.handleListUpdatedFalse.bind(this);
     }
 
-    handleListUpdatedTrue() {
-        this.setState ({
-            workerListUpdated : "true"
-        });
-    }
-
-    handleListUpdatedFalse() {
-        this.setState ({
-            workerListUpdated : "false"
-        });
-    }
 
     render() {
         return (
@@ -39,23 +26,14 @@ export default class App extends Component {
         //     </div>
         <div className="vh-100 gradient-custom">
             <div className="container">
-            <h1 className="page-header text-center">Workers CRUD {this.state.workerListUpdated}</h1>
+            <h3>{this.state.workerListUpdated}</h3>
+            <h1 className="page-header text-center">Workers CRUD </h1>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<ListWorkers 
-                    />} />
-
-                    {/* <Route path="/" render={props => (
-                        <ListWorkers {...props} handleListUpdatedTrue={this.handleListUpdatedTrue}
-                            handleListUpdatedFalse={this.handleListUpdatedFalse} workerListUpdated={this.state.workerListUpdated} /> )}
-                    /> */}
-                    <Route path="/addnewworker" element={<CreateWorker
-                    />} />
-                        {/* THIS IS IN ROUTE V4 */}
-                    {/* <Route path="/addnewworker" render={props => (
-                        <CreateWorker {...props} handleListUpdatedTrue={this.handleListUpdatedTrue}
-                            handleListUpdatedFalse={this.handleListUpdatedFalse} workerListUpdated={this.state.workerListUpdated} />)}
-                    /> */}
+                    <Route path="/" element={<ListWorkers />}
+                    />
+                    <Route path="/addnewworker" element={<CreateWorker />}
+                    />
                     <Route path="user/:id/edit" element={<EditWorker />} />
                 </Routes>
             </BrowserRouter>

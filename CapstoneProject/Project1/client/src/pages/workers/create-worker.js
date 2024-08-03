@@ -1,11 +1,10 @@
-// import React, {useState, useEffect} from 'react'
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import withRouter from '../../hooks/withRouter';
+import withRouter from '../../hooks/withRouter'; // mooded withRouter hook to work in Class
  
 // BE CARE OF END LINE CLASS CREATEWORKER COMPONENT
-// TUNNED withRouter
+// TUNNED withRouter - NOT NOW, CHANGED
 class CreateWorker extends Component {
     constructor(props) {
         super(props);
@@ -20,12 +19,20 @@ class CreateWorker extends Component {
             id_municipio: 0,
             codigo_postal: 0,
             id_provincia: 0,
-            newId: []
+            newId: [],
+            fieldDisabled: false,
+            submitButtonEnabled: true
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFieldsDisabled = this.handleFieldsDisabled.bind(this);
     }
 
+    handleFieldsDisabled() {
+        this.setState ({
+                fieldDisabled: true
+        })
+    }
     handleChange(event) {
         this.setState ({
             [event.target.name]: [event.target.value]
@@ -34,6 +41,7 @@ class CreateWorker extends Component {
 
     componentWillUnmount() {
         console.log(this.state.newId);
+        alert("mandar sms");
         // TODO
         //  - SEND EMAIL using this.state.newId
     }
@@ -71,10 +79,14 @@ class CreateWorker extends Component {
             console.log("Data created OK");
         })
         .catch(error => {
-            console.log("Data creation error");
+            return console.log("Data creation error");
         });
-        const { navigate } = this.props;
-        navigate("/");
+        this.setState ({
+            fieldDisabled: true,
+            submitButtonEnabled: false
+        })
+        // const { navigate } = this.props;
+        // navigate("/");
     }
 
     render() {
@@ -89,37 +101,42 @@ class CreateWorker extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <div className="mb-3">
                                 <label>Nombre y Apellidos</label>
-                                <input type="text" className="form-control" name="nombre" placeholder="Nombre" onChange={this.handleChange} />
+                                <input type="text" className="form-control" name="nombre" disabled={this.state.fieldDisabled} placeholder="Nombre" onChange={this.handleChange} />
                                 {/* </div>
                                 <div className="mb-3">
                                 <label>Apellidos</label> */}
-                                <input type="text" className="form-control" name="apellidos" placeholder="Apellidos" onChange={this.handleChange} />
+                                <input type="text" className="form-control" name="apellidos" disabled={this.state.fieldDisabled} placeholder="Apellidos" onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Fecha Nacimiento</label>
-                            <input type="text" className="form-control" name="fecha_nacimiento" onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="fecha_nacimiento" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>NIF/NIE</label>
-                            <input type="text" className="form-control" name="doi" onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="doi" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Municipio</label>
-                            <input type="text" className="form-control" name="id_municipio" onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="id_municipio" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Codigo Postal</label>
-                            <input type="text" className="form-control" name="codigo_postal" onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="codigo_postal" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Provincia</label>
-                            <input type="text" className="form-control" name="id_provincia" onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="id_provincia" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             {/* <div className="mb-3">
                             <label>Email</label>
                             <input type="text" className="form-control" name="email" onChange={this.handleChange} />
                             </div>    */}
-                            <button type="submit" name="add" className="btn btn-primary">Save</button>
+                            {this.state.submitButtonEnabled 
+                                ?   <button type="submit" name="add" className="btn btn-primary">Save</button>
+                                :   (<div>
+                                        <Link to="/" className="btn btn-success">Back to main</Link>
+                                        <div>DATOS ALMACENADOS</div>
+                                    </div>)}
                         </form>
                         </div>
                         <div className="col-2"></div>
@@ -129,4 +146,5 @@ class CreateWorker extends Component {
         );
     }
 }
-export default withRouter(CreateWorker);
+// export default withRouter(CreateWorker);
+export default CreateWorker;

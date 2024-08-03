@@ -26,7 +26,6 @@ handleUpdateListWorkers(id) {
           return item.id !== id;
         })
       });
-
 }
 
 buildForm() {
@@ -36,6 +35,7 @@ buildForm() {
 }
 
 handleListWorkers() {  //WORKING OK retrieving data selection
+    // debugger;
     axios({
         method: this.state.apiAction,
         url: this.state.apiUrl,
@@ -49,20 +49,14 @@ handleListWorkers() {  //WORKING OK retrieving data selection
     })
     .then(response => {
         this.setState({
-            workerItems: response.data 
+            workerItems: response.data
         });
         console.log(response.data);
         console.log("Retrieving data Ok");
-        // return console.log("Retrieveing data OK");
     })
     .catch(error => {
         console.log("retrieving data error");
-        // return console.log("retrieving data error");
     });
-}
-
-componentDidUpdate() {
-    this.handleListWorkers();
 }
 
 componentDidMount(){
@@ -81,7 +75,6 @@ render() {
                 <div className="container h-100">
                     <div className="row h-100">
                         <div className="col-12">
-                            {/* <p><Link to="/addnewuser" className="btn btn-success">Add New User</Link> </p> */}
                             <p><Link to="/addnewworker" className="btn btn-success">Add New User</Link> </p>
                             <h1>List Workers</h1>
                             <table className="table table-bordered table-striped">
@@ -103,17 +96,6 @@ render() {
                                 </thead>
                                 <tbody>
                                     {dataRecords}
-                                    {/* {users.map((user, key) =>
-                                        <tr key={key}>
-                                            <td>{user.id}</td>
-                                            <td>{user.name}</td>
-                                            <td>{user.email}</td>
-                                            <td>
-                                                <Link to={`user/${user.id}/edit`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
-                                                <button onClick={() => deleteUser(user.id)} className="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                    )} */}
                                 </tbody>
                             </table>
                         </div>
