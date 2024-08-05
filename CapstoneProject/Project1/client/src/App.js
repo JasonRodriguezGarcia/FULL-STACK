@@ -11,7 +11,8 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            workerListUpdated: false
+            // workerEditMode: false
+            // workerListUpdated: false
         // blogItems: [],
         // totalCount: 0,
     //     isLoading: true,
@@ -26,16 +27,17 @@ export default class App extends Component {
         //     </div>
         <div className="vh-100 gradient-custom">
             <div className="container">
-            <h3>{this.state.workerListUpdated}</h3>
+            {/* <h3>{this.state.workerListUpdated}</h3> */}
             <h1 className="page-header text-center">Workers CRUD </h1>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<ListWorkers />}
                     />
-                    <Route path="/addnewworker" element={<CreateWorker />}
+                    <Route path="/addnewworker" element={<CreateWorker workerEditMode = {false}/>}
                     />
-                    <Route path="user/:id/edit" element={<EditWorker />} />
-                </Routes>
+                    {/* <Route path="/get_user" element={<CreateWorker workerEditMode = {true}/>} /> */}
+                    <Route path="/user/:id/edit" element={<CreateWorker workerEditMode = {true}/>} />
+                    </Routes>
             </BrowserRouter>
             </div>
         </div>

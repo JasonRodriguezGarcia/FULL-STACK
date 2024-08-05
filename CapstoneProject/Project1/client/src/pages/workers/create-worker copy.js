@@ -5,7 +5,7 @@ import withRouter from '../../hooks/withRouter'; // mooded withRouter hook to wo
  
 // BE CARE OF END LINE CLASS CREATEWORKER COMPONENT
 // TUNNED withRouter - NOT NOW, CHANGED
-class CreateWorker extends Component {
+export default class CreateWorker extends Component {
     constructor(props) {
         super(props);
  
@@ -21,13 +21,39 @@ class CreateWorker extends Component {
             id_provincia: 0,
             newId: [],
             fieldDisabled: false,
-            submitButtonEnabled: true
+            submitButtonEnabled: true,
+            editedId: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFieldsDisabled = this.handleFieldsDisabled.bind(this);
+        this.getListWorker = this.getListWorker.bind(this);
     }
 
+    getListWorker () {
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: {
+                // query: `select * from guide where id=1;`
+                // query: `select * from guide where id=${id};`
+                // query: `UPDATE guide SET title="My first guide CHANGED" WHERE id=${id};`
+                query: `select * from trabajadores WHERE trabajadores_id_trabajador=${this.state.editedId};`
+            },
+            withCredentials: false
+        })
+        .then(response => {
+            this.setState({
+                workerItems: response.data
+            });
+            console.log(response.data);
+            console.log("Retrieving getListWorkers data Ok");
+        })
+        .catch(error => {
+            console.log("retrieving getListWorkersdata error");
+        });
+    
+    }
     handleFieldsDisabled() {
         this.setState ({
                 fieldDisabled: true
@@ -46,6 +72,13 @@ class CreateWorker extends Component {
         //  - SEND EMAIL using this.state.newId
     }
 
+    componentDidMount () {
+        alert("entro en didmount");
+        if (this.props.workerEditMode) {
+            alert("edit mode ON");
+            // this.getListWorker();
+        }
+    }
     buildForm() {
         let formData = new FormData();
         formData.append("trabajadores[trabajadores_nombre]", this.state.nombre);
@@ -147,4 +180,4 @@ class CreateWorker extends Component {
     }
 }
 // export default withRouter(CreateWorker);
-export default CreateWorker;
+// export default CreateWorker;

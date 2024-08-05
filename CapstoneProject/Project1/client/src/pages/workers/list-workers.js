@@ -12,11 +12,11 @@ export default class ListWorkers extends Component {
         workerItems: [],
         totalCount: 0,
         isLoading: true,
-        apiUrl: "http://127.0.0.1:5000/get_listworkers",
         apiAction: "POST",
+        apiUrl: "http://127.0.0.1:5000/get_listworkers",
       };
 
-      this.handleListWorkers = this.handleListWorkers.bind(this);
+      this.getListWorkers = this.getListWorkers.bind(this);
       this.handleUpdateListWorkers = this.handleUpdateListWorkers.bind(this);
     }
 
@@ -28,13 +28,8 @@ handleUpdateListWorkers(id) {
       });
 }
 
-buildForm() {
-    let formData = new FormData();
-    formData.append("[query]", "select * from trabajadores;");
-    return formData;  
-}
 
-handleListWorkers() {  //WORKING OK retrieving data selection
+getListWorkers() {  //WORKING OK retrieving data selection
     // debugger;
     axios({
         method: this.state.apiAction,
@@ -43,7 +38,7 @@ handleListWorkers() {  //WORKING OK retrieving data selection
             // query: `select * from guide where id=1;`
             // query: `select * from guide where id=${id};`
             // query: `UPDATE guide SET title="My first guide CHANGED" WHERE id=${id};`
-            query: `select * from trabajadores;`
+            query: `SELECT * FROM trabajadores;`
         },
         withCredentials: false
     })
@@ -52,15 +47,15 @@ handleListWorkers() {  //WORKING OK retrieving data selection
             workerItems: response.data
         });
         console.log(response.data);
-        console.log("Retrieving data Ok");
+        console.log("Retrieving getListWorkers data Ok");
     })
     .catch(error => {
-        console.log("retrieving data error");
+        console.log("retrieving getListWorkersdata error");
     });
 }
 
 componentDidMount(){
-    this.handleListWorkers();
+    this.getListWorkers();
 }
 
    

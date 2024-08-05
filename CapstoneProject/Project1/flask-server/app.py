@@ -113,11 +113,14 @@ def get_addnewworker():
 
 # Route to SELECT all data from the database and display in a table      
 @app.route('/get_listworkers', methods=["POST", "PUT", "PATCH", "GET"]) 
+# @app.route('/get_user', methods=["GET"])
+# @app.route('/user/${id}/edit', methods=["GET"])
 def get_results(): 
 
     # GET THE SQLALCHEMY RESULTPROXY OBJECT 
     result = db.session.execute(text(request.get_json()['query']))
     response = [] #    response = {}
+    print(request.get_json()['query'])
     if request.method == 'POST' or request.method == 'GET':
         i = 1
         # ITERATE OVER EACH RECORD IN RESULT AND ADD IT  
@@ -145,6 +148,44 @@ def get_results():
             i+= 1
         print ("api get_results ended ...")
         
+    db.session.commit()
+    return response
+
+# @app.route('/get_user', methods=["GET"])
+@app.route('/user/<id>/edit', methods=["POST", "GET"])
+def get_user(id): 
+    print(id)
+    # GET THE SQLALCHEMY RESULTPROXY OBJECT 
+    result = db.session.execute(text(request.get_json()['query']))
+    response = [] #    response = {}
+    print(request.get_json()['query'])
+    if request.method == 'POST' or request.method == 'GET':
+        i = 1
+        # ITERATE OVER EACH RECORD IN RESULT AND ADD IT  
+        # IN A PYTHON LIST/DICT OBJECT 
+        for each in result: 
+#            response.update({f'Record {i}': each}) 
+            dataList = list(each)
+            response.append({
+                "id": dataList[0],
+                "nombre": dataList[1],
+                "apellidos": dataList[2],
+                "fecha_nacimiento": dataList[3],
+                "doi": dataList[4],
+                "id_municipio": dataList[5],
+                "codigo_postal": dataList[6],
+                "id_provincia": dataList[7],
+                "id_vehiculo": dataList[8],
+                "telefono_contacto": dataList[9],
+                "correo_electronico": dataList[10],
+                "id_situacion": dataList[11],
+                "lopd": dataList[12]
+  #"curriculum` blob, -- NOT NULL,
+                })
+#            print(response)
+            i+= 1
+        print ("api get_result ended ...")
+    print(response)   
     db.session.commit()
     return response
 
