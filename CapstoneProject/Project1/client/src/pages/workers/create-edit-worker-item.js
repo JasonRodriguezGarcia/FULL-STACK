@@ -5,14 +5,20 @@ import withRouter from '../../hooks/withRouter'; // mooded withRouter hook to wo
  
 // BE CARE OF END LINE CLASS CREATEWORKER COMPONENT
 // TUNNED withRouter - NOT NOW, CHANGED
-class CreateWorker extends Component {
+export default class CreateEditWorkerItem extends Component {
     constructor(props) {
         super(props);
- 
-        this.state = {
-            apiUrl: "http://127.0.0.1:5000/addnewworker",
-            apiAction: "POST",
 
+// TODO
+// - CLEAN ALL RUBISH CODE IN CREATE-EDIT-WORKER
+// - PERFORM EDIT API
+//      - TRY USE SAME API FOR CREATE / EDIT USER
+
+
+        this.state = {
+            apiAction: "POST",
+            apiUrl: "http://127.0.0.1:5000/addnewworker",
+            id: 0,
             nombre: "",
             apellidos: "",
             fecha_nacimiento: "",
@@ -24,40 +30,41 @@ class CreateWorker extends Component {
             telefono_contacto: "",
             correo_electronico: "",
             id_situacion: 0,
-            lopd: 1,
-            newId: [],
+            lopd: "",
+            headerText: ["Create User", "Edit User"],    
             fieldDisabled: false,
             submitButtonEnabled: true,
-            // editedId: this.props.match.params.slug, <-- it ONLY WORKS IN ROUTER V.5
-            editedId: this.props.params.id,
-            workerItem: [],
-            headerText: ["Create User", "Edit User"]
-        };
+        };            
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFieldsDisabled = this.handleFieldsDisabled.bind(this);
-        this.getWorkerItem = this.getWorkerItem.bind(this);
+
     }
 
-getWorkerItem () {
-    axios({
-        method: "POST",
-        url: `http://127.0.0.1:5000/user/${this.state.editedId}/edit`,
-        data: {
-            // query: `select * from guide where id=1;`
-            // query: `select * from guide where id=${id};`
-            // query: `UPDATE guide SET title="My first guide CHANGED" WHERE id=${id};`
-            query: `SELECT * FROM trabajadores WHERE trabajadores_id_trabajador=${this.state.editedId};`
-        },
-        withCredentials: false
-    })
-    .then(response => {
-        this.setState({
-            workerItem: response.data
-        });
-        console.log(response.data);
-        console.log("Retrieving getWorkerItem data Ok");
-        // debugger;
+handleFieldsDisabled() {
+    this.setState ({
+            fieldDisabled: true
+    });
+}
+
+handleChange(event) {
+    this.setState ({
+        [event.target.name]: [event.target.value]
+    });
+}
+
+        
+componentWillUnmount() {
+    console.log(this.state.newId);
+    // alert("mandar sms");
+    // TODO
+    //  - SEND EMAIL using this.state.newId
+}
+
+componentDidUpdate () {
+    // if (this.props.workerEditMode) {
+    if (Object.keys(this.props.workerItem).length > 0) {
         const {
             id,
             nombre,
@@ -72,7 +79,10 @@ getWorkerItem () {
             correo_electronico,
             id_situacion,
             lopd
-            }  = this.state.workerItem;
+            }  = this.props.workerItem[0];
+        
+        this.props.clearWorkerItem();
+
         this.setState({
             id: id,
             nombre: nombre,
@@ -86,49 +96,11 @@ getWorkerItem () {
             telefono_contacto: telefono_contacto,
             correo_electronico: correo_electronico,
             id_situacion: id_situacion,
-            lopd
-        });
-    })
-    .catch(error => {
-        console.log("retrieving getWorkerItem error");
-    });
-}
-
-handleFieldsDisabled() {
-    this.setState ({
-            fieldDisabled: true
-    });
-}
-
-handleChange(event) {
-    this.setState ({
-        [event.target.name]: [event.target.value]
-    });
-}
-
-componentDidUpdate() {
-    if (this.props.workerEditMode) {
-        
-    }
-}
-
-componentWillUnmount() {
-    console.log(this.state.newId);
-    // alert("mandar sms");
-    // TODO
-    //  - SEND EMAIL using this.state.newId
-}
-
-componentDidMount () {
-    if (this.props.workerEditMode) {
-        this.getWorkerItem();
-        // cambiar to updaterUser API
-        this.setState ({
-            apiAction: "POST",
-            // apiUrl: `http://127.0.0.1:5000/get_user`,
+            lopd: lopd,
             apiUrl: `http://127.0.0.1:5000/user/${this.state.editedId}/edit`,
         });
     }
+
 }
 buildForm() {
     let formData = new FormData();
@@ -185,45 +157,43 @@ handleSubmit(event) {
     //     alert("Guardando Registro EDITADO");
     // }
 }
-
+    
     render() {
-        
         return (
-            <div>
-                <div className="container h-100">
-                    <div className="row">
-                        <div className="col-2"></div>
+            <div className="container h-100">
+                <div className="row">
+                    <div className="col-2"></div>
                         <div className="col-8">
-                        <h1>{this.props.workerEditMode ? this.state.headerText[1]: this.state.headerText[0]}</h1>
+                        <h1>{this.props.workerEditMode ? this.state.headerText[1]: this.state.headerText[0]}: {this.props.editedId}</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div className="mb-3">
                                 <label>Nombre y Apellidos</label>
                                 {/* <input type="text" className="form-control" name="nombre" disabled={this.state.fieldDisabled} placeholder="Nombre" onChange={this.handleChange} /> */}
-                                <input type="text" className="form-control" name="nombre" disabled={this.state.fieldDisabled} placeholder="Nombre" onChange={this.handleChange} />
+                                <input type="text" className="form-control" name="nombre" value={this.state.nombre} disabled={this.state.fieldDisabled} placeholder="Nombre" onChange={this.handleChange} />
                                 {/* </div>
                                 <div className="mb-3">
                                 <label>Apellidos</label> */}
-                                <input type="text" className="form-control" name="apellidos" disabled={this.state.fieldDisabled} placeholder="Apellidos" onChange={this.handleChange} />
+                                <input type="text" className="form-control" name="apellidos" value={this.state.apellidos} disabled={this.state.fieldDisabled} placeholder="Apellidos" onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Fecha Nacimiento</label>
-                            <input type="text" className="form-control" name="fecha_nacimiento" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="fecha_nacimiento" value={this.state.fecha_nacimiento} disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>NIF/NIE</label>
-                            <input type="text" className="form-control" name="doi" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="doi" value={this.state.doi} disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Municipio</label>
-                            <input type="text" className="form-control" name="id_municipio" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="id_municipio" value={this.state.id_municipio} disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Codigo Postal</label>
-                            <input type="text" className="form-control" name="codigo_postal" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="codigo_postal" value={this.state.codigo_postal} disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>Provincia</label>
-                            <input type="text" className="form-control" name="id_provincia" disabled={this.state.fieldDisabled} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="id_provincia" value={this.state.id_provincia} disabled={this.state.fieldDisabled} onChange={this.handleChange} />
                             </div>
                             {/* <div className="mb-3">
                             <label>Email</label>
@@ -236,13 +206,12 @@ handleSubmit(event) {
                                         <div>DATOS ALMACENADOS</div>
                                     </div>)}
                         </form>
-                        </div>
-                        <div className="col-2"></div>
                     </div>
+                    <div className="col-2"></div>
                 </div>
             </div>
         );
     }
-}
-export default withRouter(CreateWorker);
-// export default CreateWorker;
+};
+
+// export default CreateEditWorkerItem;

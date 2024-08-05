@@ -47,6 +47,7 @@ getListWorkers() {  //WORKING OK retrieving data selection
             workerItems: response.data
         });
         console.log(response.data);
+        console.log(this.state.workerItems); // ESTA EN BLANCO
         console.log("Retrieving getListWorkers data Ok");
     })
     .catch(error => {

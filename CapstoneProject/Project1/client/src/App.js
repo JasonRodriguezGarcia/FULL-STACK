@@ -4,7 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 import './bootstrap-min.css';
 import ListWorkers from "./pages/workers/list-workers";
-import CreateWorker from "./pages/workers/create-worker";
+import CreateEditWorker from "./pages/workers/create-edit-worker";
 import EditWorker from "./pages/workers/edit-worker";
 
 export default class App extends Component {
@@ -33,10 +33,10 @@ export default class App extends Component {
                 <Routes>
                     <Route path="/" element={<ListWorkers />}
                     />
-                    <Route path="/addnewworker" element={<CreateWorker workerEditMode = {false}/>}
+                    <Route path="/addnewworker" element={<CreateEditWorker workerEditMode = {false}/>}
                     />
                     {/* <Route path="/get_user" element={<CreateWorker workerEditMode = {true}/>} /> */}
-                    <Route path="/user/:id/edit" element={<CreateWorker workerEditMode = {true}/>} />
+                    <Route path="/user/:id/edit" element={<CreateEditWorker workerEditMode = {true}/>} />
                     </Routes>
             </BrowserRouter>
             </div>
