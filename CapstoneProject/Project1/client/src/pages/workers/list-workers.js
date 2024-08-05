@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import WorkerItem from "./worker-item";
+import ListWorkersItem from "./list-workers-item";
 
 export default class ListWorkers extends Component {
     constructor(props) {
@@ -62,7 +62,7 @@ componentDidMount(){
    
 render() {
     const dataRecords = this.state.workerItems.map(workerItem => {
-        return <WorkerItem key={workerItem.id} 
+        return <ListWorkersItem key={workerItem.id} 
                 workerItem={workerItem} handleUpdateListWorkers = {this.handleUpdateListWorkers} />
     });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
-const WorkerItem = props => {
+const ListWorkersItem = props => {
     const {
         id,
         nombre,
@@ -55,4 +55,4 @@ const WorkerItem = props => {
     )
 }
   
-export default WorkerItem;
+export default ListWorkersItem;

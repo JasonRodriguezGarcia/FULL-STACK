@@ -3,14 +3,11 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 import withRouter from '../../hooks/withRouter'; // mooded withRouter hook to work in Class NOT IN USE FINALLY
  
-// BE CARE OF END LINE CLASS CREATEWORKER COMPONENT
-// TUNNED withRouter - NOT NOW, CHANGED
 export default class CreateEditWorkerItem extends Component {
     constructor(props) {
         super(props);
 
 // TODO
-// - CLEAN ALL RUBISH CODE IN CREATE-EDIT-WORKER
 // - PERFORM EDIT API
 //      - TRY USE SAME API FOR CREATE / EDIT USER
 
@@ -213,5 +210,3 @@ handleSubmit(event) {
         );
     }
 };
-
-// export default CreateEditWorkerItem;

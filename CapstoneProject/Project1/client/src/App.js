@@ -5,7 +5,6 @@ import './App.css';
 import './bootstrap-min.css';
 import ListWorkers from "./pages/workers/list-workers";
 import CreateEditWorker from "./pages/workers/create-edit-worker";
-import EditWorker from "./pages/workers/edit-worker";
 
 export default class App extends Component {
     constructor() {
