@@ -25,7 +25,7 @@ class CreateEditWorker extends Component {
 getWorkerItem () {
     axios({
         method: "POST",
-        url: `http://127.0.0.1:5000/user/${this.state.editedId}/edit`,
+        url: "http://127.0.0.1:5000/get_listworkers",
         data: {
             // query: `select * from guide where id=1;`
             // query: `select * from guide where id=${id};`
@@ -35,18 +35,13 @@ getWorkerItem () {
         withCredentials: false
     })
     .then(response => {
-        // this.setState({
-        //     workerItem: response.data
-        // });
         this.setState ({
             workerItem: response.data,
             apiAction: "POST",
             // apiUrl: `http://127.0.0.1:5000/get_user`,
             apiUrl: `http://127.0.0.1:5000/user/${this.state.editedId}/edit`,
         });
-        console.log("tras el axios al editar")
         console.log(response.data);
-        console.log(this.state.workerItem);
         console.log("Retrieving getWorkerItem data Ok");
     })
     .catch(error => {
@@ -59,42 +54,6 @@ clearWorkerItem() {
         workerItem: {}
     });
 }
-
-// componentDidUpdate() {
-//     if (Object.keys(this.state.workerItem).lenght > 0) {
-//         const {
-//             id,
-//             nombre,
-//             apellidos,
-//             fecha_nacimiento,
-//             doi,
-//             id_municipio,
-//             codigo_postal,
-//             id_provincia,
-//             id_vehiculo,
-//             telefono_contacto,
-//             correo_electronico,
-//             id_situacion,
-//             lopd
-//             }  = this.state.workerItem;
-
-//         this.setState({
-//             id: id,
-//             nombre: nombre,
-//             apellidos: apellidos,
-//             fecha_nacimiento: fecha_nacimiento,
-//             doi: doi,
-//             id_municipio: id_municipio,
-//             codigo_postal: codigo_postal,
-//             id_provincia: id_provincia,
-//             id_vehiculo: id_vehiculo,
-//             telefono_contacto: telefono_contacto,
-//             correo_electronico: correo_electronico,
-//             id_situacion: id_situacion,
-//             lopd
-//         });
-//     }
-// }
 
 componentWillUnmount() {
     console.log(this.state.newId);
@@ -126,9 +85,6 @@ buildForm() {
 }
 
     render() {
-        console.log("imprimiendo workerItem en RENDER");
-        console.log(this.state.workerItem);
-        console.log(this.state.workerItem[0]);
         return (
             <CreateEditWorkerItem workerItem = {this.state.workerItem}
                 workerEditMode = {this.props.workerEditMode}

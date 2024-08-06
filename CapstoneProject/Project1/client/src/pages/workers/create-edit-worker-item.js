@@ -6,11 +6,6 @@ export default class CreateEditWorkerItem extends Component {
     constructor(props) {
         super(props);
 
-// TODO
-// - PERFORM EDIT API
-//      - TRY USE SAME API FOR CREATE / EDIT USER
-
-
         this.state = {
             apiAction: "POST",
             apiUrl: "http://127.0.0.1:5000/addnewworker",
@@ -59,7 +54,7 @@ componentWillUnmount() {
 }
 
 componentDidUpdate () {
-    // if (this.props.workerEditMode) {
+
     if (Object.keys(this.props.workerItem).length > 0) {
         const {
             id,
@@ -93,16 +88,13 @@ componentDidUpdate () {
             correo_electronico: correo_electronico,
             id_situacion: id_situacion,
             lopd: lopd,
-            apiUrl: `http://127.0.0.1:5000/user/${this.state.editedId}/edit`,
+            apiUrl: `http://127.0.0.1:5000/user/${this.props.editedId}/edit`,
         });
     }
 
 }
 buildForm() {
     let formData = new FormData();
-    if (this.props.workerEditMode) {
-        formData.append("trabajadores[trabajadores_nombre]", this.props.editedId);
-    }
     formData.append("trabajadores[trabajadores_nombre]", this.state.nombre);
     formData.append("trabajadores[trabajadores_apellidos]", this.state.apellidos);
     formData.append("trabajadores[trabajadores_fecha_nacimiento]", this.state.fecha_nacimiento);
@@ -120,7 +112,6 @@ buildForm() {
 
 handleSubmit(event) {
     event.preventDefault();
-    // alert(this.props.workerEditMode);
     axios({
         method: this.state.apiAction,
         url: this.state.apiUrl,
@@ -135,7 +126,7 @@ handleSubmit(event) {
             this.setState({
                 newId: response.data
             });
-            // console.log(response.data);
+            console.log(response.data);
             console.log("Data created OK");
         }
     })
