@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import withRouter from '../../hooks/withRouter'; // mooded withRouter hook to work in Class NOT IN USE FINALLY
  
 export default class CreateEditWorkerItem extends Component {
     constructor(props) {
@@ -101,6 +100,9 @@ componentDidUpdate () {
 }
 buildForm() {
     let formData = new FormData();
+    if (this.props.workerEditMode) {
+        formData.append("trabajadores[trabajadores_nombre]", this.props.editedId);
+    }
     formData.append("trabajadores[trabajadores_nombre]", this.state.nombre);
     formData.append("trabajadores[trabajadores_apellidos]", this.state.apellidos);
     formData.append("trabajadores[trabajadores_fecha_nacimiento]", this.state.fecha_nacimiento);
@@ -128,7 +130,7 @@ handleSubmit(event) {
     .then(response => {
         console.log(this.props.workerEditMode);
         if (this.props.workerEditMode){
-            alert("grabar registro");
+            alert("Modified data OK");
         } else {
             this.setState({
                 newId: response.data
@@ -200,7 +202,7 @@ handleSubmit(event) {
                                 ?   <button type="submit" name="add" className="btn btn-primary">Save</button>
                                 :   (<div>
                                         <Link to="/" className="btn btn-success">Back to main</Link>
-                                        <div>DATOS ALMACENADOS</div>
+                                        <div>DATA SAVED</div>
                                     </div>)}
                         </form>
                     </div>

@@ -61,62 +61,69 @@ def userdelete(id):
     })
     return response
 
-# Route to CREATE one worker in the database
+# Route to CREATE/EDIT one worker in the database
 @app.route('/addnewworker', methods=["POST", "PUT", "PATCH", "GET"]) 
-def get_addnewworker(): 
-    # nombre = request.form.get("trabajadores[trabajadores_nombre]")
-    parameters = (
-        {"nombre" : request.form.get("trabajadores[trabajadores_nombre]"),
-        "apellidos" : request.form.get("trabajadores[trabajadores_apellidos]"),
-        "fecha_nacimiento" : request.form.get("trabajadores[trabajadores_fecha_nacimiento]"),
-        "doi" : request.form.get("trabajadores[trabajadores_doi]"), 
-        "id_municipio" : request.form.get("trabajadores[trabajadores_id_municipio]"),
-        "codigo_postal" : request.form.get("trabajadores[trabajadores_codigo_postal]"),
-        "id_provincia" : request.form.get("trabajadores[trabajadores_id_provincia]"),
-        "id_vehiculo" : 1,
-        "telefono_contacto" : "943333333",
-        "correo_electronico" : "pepe@test2.com",
-        "id_situacion" : 1,
-        "lopd" : "S"
-    })
-    result = db.session.execute(text(f'INSERT INTO trabajadores (\
-                                    trabajadores_nombre,\
-                                    trabajadores_apellidos,\
-                                    trabajadores_fecha_nacimiento,\
-                                    trabajadores_doi,\
-                                    trabajadores_id_municipio,\
-                                    trabajadores_codigo_postal,\
-                                    trabajadores_id_provincia, \
-                                    trabajadores_id_vehiculo, \
-                                    trabajadores_telefono_contacto, \
-                                    trabajadores_correo_electronico, \
-                                    trabajadores_id_situacion, \
-                                    trabajadores_lopd \
-                                )\
-                                VALUES (:nombre, :apellidos, :fecha_nacimiento, :doi, :id_municipio, \
-                                        :codigo_postal, :id_provincia, :id_vehiculo, :telefono_contacto, \
-                                        :correo_electronico, :id_situacion, :lopd) \
-                                ;')
-                                , parameters) 
+@app.route('/user/<id>/edit', methods=["POST", "GET"])
+def get_addeditnewworker(id = None): 
+    print ("printing id: "+str(id))
+    if id != None:
+        print("modificando registro")
+        response = []
+        actionText1 = "UPDATE trabajadores SET "
+        actionText2 = "WHERE trabajadores_id_trabajador="+id+";"
+        # print(actionText2)
+    else:
+        actionText = "INSERT INTO "
+        parameters = (
+            {"nombre" : request.form.get("trabajadores[trabajadores_nombre]"),
+            "apellidos" : request.form.get("trabajadores[trabajadores_apellidos]"),
+            "fecha_nacimiento" : request.form.get("trabajadores[trabajadores_fecha_nacimiento]"),
+            "doi" : request.form.get("trabajadores[trabajadores_doi]"), 
+            "id_municipio" : request.form.get("trabajadores[trabajadores_id_municipio]"),
+            "codigo_postal" : request.form.get("trabajadores[trabajadores_codigo_postal]"),
+            "id_provincia" : request.form.get("trabajadores[trabajadores_id_provincia]"),
+            "id_vehiculo" : 1,
+            "telefono_contacto" : "943333333",
+            "correo_electronico" : "pepe@test2.com",
+            "id_situacion" : 1,
+            "lopd" : "S"
+        })
+        result = db.session.execute(text(f'INSERT INTO trabajadores (\
+                                        trabajadores_nombre,\
+                                        trabajadores_apellidos,\
+                                        trabajadores_fecha_nacimiento,\
+                                        trabajadores_doi,\
+                                        trabajadores_id_municipio,\
+                                        trabajadores_codigo_postal,\
+                                        trabajadores_id_provincia, \
+                                        trabajadores_id_vehiculo, \
+                                        trabajadores_telefono_contacto, \
+                                        trabajadores_correo_electronico, \
+                                        trabajadores_id_situacion, \
+                                        trabajadores_lopd \
+                                    )\
+                                    VALUES (:nombre, :apellidos, :fecha_nacimiento, :doi, :id_municipio, \
+                                            :codigo_postal, :id_provincia, :id_vehiculo, :telefono_contacto, \
+                                            :correo_electronico, :id_situacion, :lopd) \
+                                    ;')
+                                    , parameters) 
 
-    db.session.commit()
-    # print(result)
-    newCreatedId = result.lastrowid
-    # newCreatedId +1
-    print(newCreatedId)
-    response = []
-    response.append ({
-        "id": newCreatedId
-    })
+        db.session.commit()
+        # print(result)
+        newCreatedId = result.lastrowid
+        # newCreatedId +1
+        print(newCreatedId)
+        response = []
+        response.append ({
+            "id": newCreatedId
+        })
     return response
 #    return jsonify("Data saved OK")
 
-# Route to SELECT all data from the database and display in a table      
+# Route to SELECT all data from workers(trabajadores) database
 @app.route('/get_listworkers', methods=["POST", "PUT", "PATCH", "GET"]) 
-# @app.route('/get_user', methods=["GET"])
-# @app.route('/user/${id}/edit', methods=["GET"])
 def get_results(): 
-
+# def get_results(): 
     # GET THE SQLALCHEMY RESULTPROXY OBJECT 
     result = db.session.execute(text(request.get_json()['query']))
     response = [] #    response = {}
@@ -129,6 +136,7 @@ def get_results():
 #            response.update({f'Record {i}': each}) 
             dataList = list(each)
             response.append({
+            # response.append({f'{i}': {
                 "id": dataList[0],
                 "nombre": dataList[1],
                 "apellidos": dataList[2],
@@ -142,7 +150,7 @@ def get_results():
                 "correo_electronico": dataList[10],
                 "id_situacion": dataList[11],
                 "lopd": dataList[12]
-  #"curriculum` blob, -- NOT NULL,
+#"curriculum` blob, -- NOT NULL,
                 })
 #            print(response)
             i+= 1
@@ -152,8 +160,8 @@ def get_results():
     return response
 
 # @app.route('/get_user', methods=["GET"])
-@app.route('/user/<id>/edit', methods=["POST", "GET"])
-def get_user(id): 
+@app.route('/user/<id>/editT', methods=["POST", "GET"])
+def get_userT(id): 
     print(id)
     # GET THE SQLALCHEMY RESULTPROXY OBJECT 
     result = db.session.execute(text(request.get_json()['query']))
@@ -258,3 +266,14 @@ if __name__ == '__main__':
 # test for coding
 # results = session.query(User).select(User.id, User.address).join(Jobs.user_id).all()
 
+
+# import sqlite3
+# def getInicio():
+#     conn=sqlite3.connect("baseTabla.db")
+#     c = conn.cursor()
+#     row=c.execute("SELECT * FROM tabla")
+#     resultado =c.fetchall()
+#     for res in resultado:
+#       print(res)
+#     conn.close()
+# getInicio()
