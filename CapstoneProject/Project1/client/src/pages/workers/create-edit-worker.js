@@ -11,7 +11,7 @@ class CreateEditWorker extends Component {
         super(props);
  
         this.state = {
-            apiUrl: "http://127.0.0.1:5000/addnewworker",
+            apiUrl: "http://127.0.0.1:5000/addworker",
             apiAction: "POST",
             newId: [],
             // editedId: this.props.match.params.slug, <-- it ONLY WORKS IN ROUTER V.5
@@ -39,7 +39,7 @@ getWorkerItem () {
             workerItem: response.data,
             apiAction: "POST",
             // apiUrl: `http://127.0.0.1:5000/get_user`,
-            apiUrl: `http://127.0.0.1:5000/user/${this.state.editedId}/edit`,
+            apiUrl: `http://127.0.0.1:5000/editworker/${this.state.editedId}`,
         });
         console.log(response.data);
         console.log("Retrieving getWorkerItem data Ok");

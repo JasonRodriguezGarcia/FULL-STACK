@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `carnets`;
 CREATE TABLE `carnets` (
   `carnets_id_carnet` INTEGER PRIMARY KEY AUTOINCREMENT,
   `carnets_descripcion_carnet` TEXT(3) NOT NULL UNIQUE,
-  `carnets_texto_libre` TEXT(30) NOT NULL
+  `carnets_texto_libre` TEXT(30)
 );
 --   PRIMARY KEY (carnets_id_carnet),
 --   UNIQUE KEY carnets_id_carnet_UNIQUE (carnets_id_carnet)
@@ -36,7 +36,7 @@ DROP TABLE IF EXISTS `estados_ofertas`;
 CREATE TABLE `estados_ofertas` (
   `estados_ofertas_id_estado_oferta` INTEGER NOT NULL,
   `estados_ofertas_descripcion_estado_oferta` TEXT(20) NOT NULL,
-  `estados_ofertas_descripcion_estado_oferta_texto_libre` TEXT(20) NOT NULL,
+  `estados_ofertas_descripcion_estado_oferta_texto_libre` TEXT(20),
   PRIMARY KEY (`estados_ofertas_id_estado_oferta`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `estados_trabajadores`;
 CREATE TABLE `estados_trabajadores` (
   `estados_trabajadores_id_estado_trabajador` INTEGER NOT NULL,
   `estados_trabajadores_descripcion_estado_trabajador` TEXT(20) NOT NULL,
-  `estados_trabajadores_descripcion_estado_trabajador_texto_libre` TEXT(20) NOT NULL,
+  `estados_trabajadores_descripcion_estado_trabajador_texto_libre` TEXT(20),
   PRIMARY KEY (`estados_trabajadores_id_estado_trabajador`),
   UNIQUE (`estados_trabajadores_id_estado_trabajador`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -53,7 +53,7 @@ DROP TABLE IF EXISTS `formaciones`;
 CREATE TABLE `formaciones` (
   `formaciones_id_formacion` INTEGER NOT NULL, -- AUTOINCREMENT,
   `formaciones_descripcion_formacion` TEXT(190) NOT NULL,
-  `formaciones_descripcion_formacion_texto_libre` TEXT(190) NOT NULL,
+  `formaciones_descripcion_formacion_texto_libre` TEXT(190),
   PRIMARY KEY (`formaciones_id_formacion`),
   UNIQUE (`formaciones_id_formacion`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -62,7 +62,7 @@ DROP TABLE IF EXISTS `idiomas`;
 CREATE TABLE `idiomas` (
   `idiomas_id_idioma` INTEGER NOT NULL, -- AUTO_INCREMENT,
   `idiomas_descripcion_idioma` TEXT(20) NOT NULL,
-  `idiomas_descripcion_idioma_texto_libre` TEXT(20) NOT NULL,
+  `idiomas_descripcion_idioma_texto_libre` TEXT(20),
   PRIMARY KEY (`idiomas_id_idioma`),
   UNIQUE (`idiomas_id_idioma`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `jornadas`;
 CREATE TABLE `jornadas` (
   `jornadas_id_jornada` INTEGER NOT NULL, -- AUTO_INCREMENT,
   `jornadas_descipcion_jornada` TEXT(20) NOT NULL,
-  `jornadas_descipcion_jornada_texto_libre` TEXT(20) NOT NULL,
+  `jornadas_descipcion_jornada_texto_libre` TEXT(20),
   PRIMARY KEY (`jornadas_id_jornada`),
   UNIQUE (`jornadas_id_jornada`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `municipios`;
 CREATE TABLE `municipios` (
   `municipios_id_municipio` INTEGER NOT NULL, -- AUTO_INCREMENT,
   `municipios_descripcion_municipio` TEXT(45) NOT NULL,
-  `municipios_descripcion_municipio_texto_libre` TEXT(45) NOT NULL,
+  `municipios_descripcion_municipio_texto_libre` TEXT(45),
   PRIMARY KEY (`municipios_id_municipio`),
   UNIQUE (`municipios_id_municipio`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -89,7 +89,7 @@ DROP TABLE IF EXISTS `provincias`;
 CREATE TABLE `provincias` (
   `provincias_id_provincia` INTEGER NOT NULL, -- AUTO_INCREMENT,
   `provincias_descripcion_provincia` TEXT(45) NOT NULL,
-  `provincias_descripcion_provincia_texto_libre` TEXT(45) NOT NULL,
+  `provincias_descripcion_provincia_texto_libre` TEXT(45),
   PRIMARY KEY (`provincias_id_provincia`),
   UNIQUE (`provincias_id_provincia`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -98,7 +98,7 @@ DROP TABLE IF EXISTS `nivel_idiomas`;
 CREATE TABLE `nivel_idiomas` (
   `nivel_idiomas_id_nivel_idioma` INTEGER NOT NULL, -- AUTO_INCREMENT,
   `nivel_idiomas_descripcion_nivel_idioma` TEXT(20) NOT NULL,
-  `nivel_idiomas_descripcion_nivel_idioma_texto_libre` TEXT(20) NOT NULL,
+  `nivel_idiomas_descripcion_nivel_idioma_texto_libre` TEXT(20),
   PRIMARY KEY (`nivel_idiomas_id_nivel_idioma`),
   UNIQUE (`nivel_idiomas_id_nivel_idioma`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -107,7 +107,7 @@ DROP TABLE IF EXISTS `ocupaciones`;
 CREATE TABLE `ocupaciones` (
   `ocupaciones_id_ocupacion` INTEGER NOT NULL, -- AUTO_INCREMENT,
   `ocupaciones_descripcion_ocupacion` TEXT(120) NOT NULL,
-  `ocupaciones_descripcion_ocupacion_texto_libre` TEXT(120) NOT NULL,
+  `ocupaciones_descripcion_ocupacion_texto_libre` TEXT(120),
   PRIMARY KEY (`ocupaciones_id_ocupacion`),
   UNIQUE (`ocupaciones_id_ocupacion`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -173,7 +173,7 @@ DROP TABLE IF EXISTS `vehiculos`;
 CREATE TABLE `vehiculos` (
   `vehiculos_id_vehiculo` INTEGER NOT NULL, -- AUTO_INCREMENT,
   `vehiculos_descripcion_vehiculo` TEXT(20) NOT NULL,
-  `vehiculos_descripcion_vehiculo_texto_libre` TEXT(20) NOT NULL,
+  `vehiculos_descripcion_vehiculo_texto_libre` TEXT(20),
   PRIMARY KEY (`vehiculos_id_vehiculo`),
   UNIQUE (`vehiculos_id_vehiculo`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
@@ -242,7 +242,7 @@ DROP TABLE IF EXISTS `trabajadores_situaciones`;
 CREATE TABLE `trabajadores_situaciones` (
   `trabajadores_situaciones_id_situacion` INTEGER NOT NULL,
   `trabajadores_situaciones_descripcion_situacion` TEXT(10) NOT NULL,
-  `trabajadores_situaciones_descripcion_situacion_texto_libre` TEXT(10) NOT NULL,
+  `trabajadores_situaciones_descripcion_situacion_texto_libre` TEXT(10),
   PRIMARY KEY (`trabajadores_situaciones_id_situacion`),
   UNIQUE (`trabajadores_situaciones_id_situacion`)
 ); -- ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

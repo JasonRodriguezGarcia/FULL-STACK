@@ -8,7 +8,7 @@ export default class CreateEditWorkerItem extends Component {
 
         this.state = {
             apiAction: "POST",
-            apiUrl: "http://127.0.0.1:5000/addnewworker",
+            apiUrl: "http://127.0.0.1:5000/addworker",
             id: 0,
             nombre: "",
             apellidos: "",
@@ -76,19 +76,19 @@ componentDidUpdate () {
 
         this.setState({
             id: id,
-            nombre: nombre,
-            apellidos: apellidos,
-            fecha_nacimiento: fecha_nacimiento,
-            doi: doi,
-            id_municipio: id_municipio,
-            codigo_postal: codigo_postal,
-            id_provincia: id_provincia,
-            id_vehiculo: id_vehiculo,
-            telefono_contacto: telefono_contacto,
-            correo_electronico: correo_electronico,
-            id_situacion: id_situacion,
-            lopd: lopd,
-            apiUrl: `http://127.0.0.1:5000/user/${this.props.editedId}/edit`,
+            nombre: nombre || "",
+            apellidos: apellidos || "",
+            fecha_nacimiento: fecha_nacimiento || "",
+            doi: doi || "",
+            id_municipio: id_municipio || 0,
+            codigo_postal: codigo_postal || "",
+            id_provincia: id_provincia  || 0,
+            id_vehiculo: id_vehiculo || 0,
+            telefono_contacto: telefono_contacto || "",
+            correo_electronico: correo_electronico || "",
+            id_situacion: id_situacion || 0,
+            lopd: lopd || "N",
+            apiUrl: `http://127.0.0.1:5000/editworker/${this.props.editedId}`,
         });
     }
 
@@ -121,7 +121,7 @@ handleSubmit(event) {
     .then(response => {
         console.log(this.props.workerEditMode);
         if (this.props.workerEditMode){
-            alert("Modified data OK");
+            console.log("Data modified OK");
         } else {
             this.setState({
                 newId: response.data
@@ -167,7 +167,7 @@ handleSubmit(event) {
                             </div>
                             <div className="mb-3">
                             <label>Fecha Nacimiento</label>
-                            <input type="text" className="form-control" name="fecha_nacimiento" value={this.state.fecha_nacimiento} disabled={this.state.fieldDisabled} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="fecha_nacimiento" value={this.state.fecha_nacimiento} disabled={this.state.fieldDisabled} placeholder="dd/mm/yyyy"onChange={this.handleChange} />
                             </div>
                             <div className="mb-3">
                             <label>NIF/NIE</label>

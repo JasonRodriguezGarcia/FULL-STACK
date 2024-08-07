@@ -32,10 +32,10 @@ export default class App extends Component {
                 <Routes>
                     <Route path="/" element={<ListWorkers />}
                     />
-                    <Route path="/addnewworker" element={<CreateEditWorker workerEditMode = {false}/>}
+                    <Route path="/addworker" element={<CreateEditWorker workerEditMode = {false}/>}
                     />
                     {/* <Route path="/get_user" element={<CreateWorker workerEditMode = {true}/>} /> */}
-                    <Route path="/user/:id/edit" element={<CreateEditWorker workerEditMode = {true}/>} />
+                    <Route path="/editworker/:id" element={<CreateEditWorker workerEditMode = {true}/>} />
                     </Routes>
             </BrowserRouter>
             </div>

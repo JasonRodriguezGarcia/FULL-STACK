@@ -70,7 +70,7 @@ render() {
                 <div className="container h-100">
                     <div className="row h-100">
                         <div className="col-12">
-                            <p><Link to="/addnewworker" className="btn btn-success">Add New User</Link> </p>
+                            <p><Link to="/addworker" className="btn btn-success">Add New User</Link> </p>
                             <h1>List Workers</h1>
                             <table className="table table-bordered table-striped">
                                 <thead>

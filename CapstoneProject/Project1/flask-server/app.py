@@ -63,8 +63,8 @@ def userdelete(id):
     return response
 
 # Route to CREATE worker in the database
-@app.route('/addnewworker', methods=["POST", "PUT", "PATCH", "GET"]) 
-def addnewworker(): 
+@app.route('/addworker', methods=["POST", "PUT", "PATCH", "GET"]) 
+def addworker(): 
     parameters = (
         {"nombre" : request.form.get("trabajadores[trabajadores_nombre]"),
         "apellidos" : request.form.get("trabajadores[trabajadores_apellidos]"),
@@ -114,8 +114,8 @@ def addnewworker():
 #    return jsonify("Data saved OK")
 
 # Route to EDIT worker in the database
-# @app.route('/get_user', methods=["GET"])
-@app.route('/user/<id>/edit', methods=["POST", "GET"])
+#@app.route('/user/<id>/edit', methods=["POST", "GET"])
+@app.route('/editworker/<id>', methods=["POST", "GET"])
 def editworker(id): 
     parameters = (
         {"nombre" : request.form.get("trabajadores[trabajadores_nombre]"),

@@ -48,7 +48,7 @@ const ListWorkersItem = props => {
             <td>{id_provincia}</td>
             <td>
                 {/* <Link to={`/get_user`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link> */}
-                <Link to={`/user/${id}/edit`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
+                <Link to={`/editworker/${id}`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
                 <button onClick={() => deleteUser(id)} className="btn btn-danger">Delete</button>
             </td>
         </tr>
