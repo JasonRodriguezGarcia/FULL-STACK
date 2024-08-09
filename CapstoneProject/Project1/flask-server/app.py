@@ -4,8 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 from sqlalchemy import text
 from flask_marshmallow import Marshmallow
-import sqlite3
 import os
+
+from collections import namedtuple
+
 
 app = Flask(__name__)
 # Allowing access to Flask server to following ips, second IP is example for more ip's list case
@@ -22,6 +24,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app) # to iterate with database
 ma = Marshmallow(app) # to add structure to the database
+
 
 # Guide inherits Model from db object
 class Guide(db.Model):
@@ -46,9 +49,170 @@ guides_schema = GuideSchema(many=True)
 # Para enviar los datos del formulario, pasa un objeto FormData poblado. 
 # Esto utiliza el mismo formato que un formulario HTML, y se accedería con request.form en una vista Flask.
 
+#fillR
 
-@app.route('/workerdelete/<id>',methods=['DELETE'])
-def userdelete(id):
+@app.route('/get_worker_secundary_databases',methods=['GET'])
+def get_secundary_databases():
+# CODE OK
+    response = [] #    response = {}
+    listTables = [  ["trabajadores_situaciones", ["id_situacion:", "descripcion_situacion:"]] ,
+                    ["carnets", ["carnets_id_carnet", "carnets_descripcion_carnet"]],
+                    ["vehiculos"],
+                    ["provincias"],
+                    ["municipios"]
+    ]
+    result1 = db.session.execute(text(f'SELECT * FROM '+listTables[0][0]+';'))
+    result2 = db.session.execute(text(f'SELECT * FROM '+listTables[1][0]+';'))
+    result3 = db.session.execute(text(f'SELECT * FROM '+listTables[2][0]+';'))
+    result4 = db.session.execute(text(f'SELECT * FROM '+listTables[3][0]+';'))
+    result5 = db.session.execute(text(f'SELECT * FROM '+listTables[4][0]+';'))
+    db.session.commit()
+    # response1 = {} #    response = {}
+    # i=1
+    # for each in result1: 
+    #     response1[].update({f'Record {i}': each}) 
+    #     # response1.update({f'Record {i}': each}) 
+    #     # dataList = list(each)
+    #     # response1.append({
+    #     #     "id_situacion": dataList[0],
+    #     #     "descripcion_situacion": dataList[1]
+    #     # })
+    # # print(dict(response))
+    # # response[listTables[0][0]] = response1
+    # print(response)
+    # # response =  { "situaciones": response1
+    # #             }
+    
+    
+    response1 = [] #    response = {}
+    for each in result1: 
+        dataList = list(each)
+        response1.append({
+            "id_situacion": dataList[0],
+            "descripcion_situacion": dataList[1]
+        })
+    response2 = [] #    response = {}
+    for each in result2: 
+        dataList = list(each)
+        response2.append({
+            "id_carnet": dataList[0],
+            "descripcion_carnet": dataList[1]
+        })
+   
+    response3 = [] #    response = {}
+    for each in result3: 
+        dataList = list(each)
+        response3.append({
+            "id_vehiculo": dataList[0],
+            "descripcion_vehiculo": dataList[1]
+        })
+   
+    response4 = [] #    response = {}
+    for each in result4: 
+        dataList = list(each)
+        response4.append({
+            "id_provincia": dataList[0],
+            "descripcion_provincia": dataList[1]
+        })
+    response5 = [] #    response = {}
+    for each in result5: 
+        dataList = list(each)
+        response5.append({
+            "id_municipio": dataList[0],
+            "descripcion_municipio": dataList[1]
+        })
+    response =  {
+                    # f'{listTables[0][0]}': response1,
+                    # f'{listTables[1][0]}': response2,
+                    # f'{listTables[2][0]}': response3,
+                    f'{listTables[3][0]}': response4,
+                    f'{listTables[4][0]}': response5
+                }
+    print(response)
+    # response = [] #    response = {}
+    # response.append(listTables[0][0])
+    # for each in result1: 
+    #     dataList = list(each)
+    #     response.append({
+    #         "id_situacion": dataList[0],
+    #         "descripcion_situacion": dataList[1]
+    #     })
+
+    # response.append(listTables[1][0])
+    # for each in result2: 
+    #     dataList = list(each)
+    #     response.append({
+    #         "id_carnet": dataList[0],
+    #         "descripcion_carnet": dataList[1]
+    #     })
+    # response.append(listTables[2][0])
+    # for each in result3: 
+    #     dataList = list(each)
+    #     response.append({
+    #         "id_vehiculo": dataList[0],
+    #         "descripcion_vehiculo": dataList[1]
+    #     })
+    # response.append(listTables[3][0])
+    # for each in result4: 
+    #     dataList = list(each)
+    #     response.append({
+    #         "id_provincia": dataList[0],
+    #         "descripcion_provincia": dataList[1]
+    #     })
+    # response.append(listTables[4][0])
+    # for each in result5: 
+    #     dataList = list(each)
+    #     response.append({
+    #         "id_municipio": dataList[0],
+    #         "descripcion_municipio": dataList[1]
+    #     })
+    # print(response)
+    # return "terminado"        
+    return response
+    # return "terminacion OK ..."
+
+# Route to SELECT all data from workers(trabajadores) database
+@app.route('/get_listworkers', methods=["POST", "PUT", "PATCH", "GET"]) 
+def get_listworkers(): 
+# def get_results(): 
+    # GET THE SQLALCHEMY RESULTPROXY OBJECT 
+    result = db.session.execute(text(request.get_json()['query']))
+    response = [] #    response = {}
+    print(request.get_json()['query'])
+    if request.method == 'POST' or request.method == 'GET':
+        i = 1
+        # ITERATE OVER EACH RECORD IN RESULT AND ADD IT  
+        # IN A PYTHON LIST/DICT OBJECT 
+        for each in result: 
+#            response.update({f'Record {i}': each}) 
+            dataList = list(each)
+            response.append({
+            # response.append({f'{i}': {
+                "id": dataList[0],
+                "nombre": dataList[1],
+                "apellidos": dataList[2],
+                "fecha_nacimiento": dataList[3],
+                "doi": dataList[4],
+                "id_municipio": dataList[5],
+                "codigo_postal": dataList[6],
+                "id_provincia": dataList[7],
+                "id_vehiculo": dataList[8],
+                "telefono_contacto": dataList[9],
+                "correo_electronico": dataList[10],
+                "id_situacion": dataList[11],
+                "lopd": dataList[12]
+#"curriculum` blob, -- NOT NULL,
+                })
+#            print(response)
+            i+= 1
+        print ("api get_results ended ...")
+        
+    db.session.commit()
+    print(response)
+    return response
+
+@app.route('/deleteworker/<id>',methods=['DELETE'])
+def deleteworker(id):
     # user = Users.query.get(id)
     # db.session.delete(user)
     # db.session.commit()
@@ -150,45 +314,8 @@ def editworker(id):
     print("Workers Record Modificated id: "+id)
     return "Workers Record Modificated"
 
-# Route to SELECT all data from workers(trabajadores) database
-@app.route('/get_listworkers', methods=["POST", "PUT", "PATCH", "GET"]) 
-def get_listworkers(): 
-# def get_results(): 
-    # GET THE SQLALCHEMY RESULTPROXY OBJECT 
-    result = db.session.execute(text(request.get_json()['query']))
-    response = [] #    response = {}
-    print(request.get_json()['query'])
-    if request.method == 'POST' or request.method == 'GET':
-        i = 1
-        # ITERATE OVER EACH RECORD IN RESULT AND ADD IT  
-        # IN A PYTHON LIST/DICT OBJECT 
-        for each in result: 
-#            response.update({f'Record {i}': each}) 
-            dataList = list(each)
-            response.append({
-            # response.append({f'{i}': {
-                "id": dataList[0],
-                "nombre": dataList[1],
-                "apellidos": dataList[2],
-                "fecha_nacimiento": dataList[3],
-                "doi": dataList[4],
-                "id_municipio": dataList[5],
-                "codigo_postal": dataList[6],
-                "id_provincia": dataList[7],
-                "id_vehiculo": dataList[8],
-                "telefono_contacto": dataList[9],
-                "correo_electronico": dataList[10],
-                "id_situacion": dataList[11],
-                "lopd": dataList[12]
-#"curriculum` blob, -- NOT NULL,
-                })
-#            print(response)
-            i+= 1
-        print ("api get_results ended ...")
-        
-    db.session.commit()
-    return response
 
+# OLD COURSE CODE
 # Endpoint to create a new guide
 @app.route('/guide', methods=["POST"])
 def add_guide():

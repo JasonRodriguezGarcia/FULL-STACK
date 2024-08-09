@@ -23,7 +23,7 @@ const ListWorkersItem = props => {
     const deleteUser = (id) => {
         axios({
             method: 'DELETE',
-            url: `http://127.0.0.1:5000/workerdelete/${id}`,
+            url: `http://127.0.0.1:5000/deleteworker/${id}`,
             withCredentials: false
             })
             .then(response => {
